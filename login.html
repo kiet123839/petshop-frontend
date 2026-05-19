@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Organic Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#11eaff",
+                        "outline": "#568061",
+                        "outline-variant": "#8bb795",
+                        "on-tertiary-fixed": "#003d43",
+                        "primary-fixed-dim": "#83e881",
+                        "surface-container-highest": "#acecbb",
+                        "secondary-fixed-dim": "#77eb9f",
+                        "on-primary": "#d1ffc8",
+                        "tertiary": "#00656f",
+                        "on-error-container": "#520c00",
+                        "surface-variant": "#acecbb",
+                        "primary": "#006b1b",
+                        "on-surface": "#0b361d",
+                        "surface-container-high": "#b5f0c2",
+                        "error": "#b02500",
+                        "surface-bright": "#ddffe2",
+                        "secondary": "#006a38",
+                        "on-background": "#0b361d",
+                        "on-primary-fixed-variant": "#00691a",
+                        "on-surface-variant": "#3b6447",
+                        "inverse-on-surface": "#7ba785",
+                        "tertiary-dim": "#005861",
+                        "secondary-fixed": "#86faac",
+                        "on-error": "#ffefec",
+                        "error-dim": "#b92902",
+                        "background": "#ddffe2",
+                        "primary-container": "#91f78e",
+                        "on-primary-fixed": "#00480f",
+                        "surface-tint": "#006b1b",
+                        "on-secondary": "#ccffd6",
+                        "secondary-dim": "#005c30",
+                        "surface-dim": "#a0e4b1",
+                        "tertiary-fixed-dim": "#00dbee",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#ddffe2",
+                        "primary-dim": "#005d16",
+                        "surface-container": "#bef5ca",
+                        "on-secondary-container": "#005f32",
+                        "on-primary-container": "#005e17",
+                        "on-tertiary": "#d4f9ff",
+                        "primary-fixed": "#91f78e",
+                        "on-secondary-fixed": "#004a26",
+                        "surface-container-low": "#cafdd4",
+                        "error-container": "#f95630",
+                        "inverse-primary": "#91f78e",
+                        "tertiary-fixed": "#11eaff",
+                        "on-secondary-fixed-variant": "#006a38",
+                        "secondary-container": "#86faac",
+                        "on-tertiary-container": "#005159",
+                        "inverse-surface": "#001206",
+                        "on-tertiary-fixed-variant": "#005c64"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container relative bg-white">
+<!-- TopAppBar suppressed due to "Linear/Transactional" intent rule -->
+<!-- SideNav / BottomNavBar suppressed due to "Linear/Transactional" intent rule -->
+<main class="flex-grow flex items-center justify-center p-6 relative z-10">
+<div class="w-full max-w-md">
+<div class="flex flex-col items-center mb-10">
+<div class="w-20 h-20 bg-surface-container-highest rounded-[2rem] flex items-center justify-center shadow-[0_12px_40px_rgba(11,54,29,0.08)] mb-6 transform -rotate-6">
+<span class="material-symbols-outlined text-[3rem] text-primary" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<h1 class="font-headline text-[2.5rem] font-bold text-on-surface tracking-tight leading-tight text-center">
+                    PetShop
+                </h1>
+<p class="font-body text-body-lg text-on-surface-variant mt-2 text-center">
+                    Welcome to your organic sanctuary.
+                </p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_24px_60px_rgba(11,54,29,0.06)] relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-surface-container-low rounded-full opacity-50 blur-2xl"></div>
+<form class="flex flex-col gap-6 relative z-10">
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-label-md text-on-surface-variant pl-4" for="username">Username</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full bg-surface-container-low border-none rounded-md py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/60 focus:ring-0 focus:bg-surface-container-highest transition-colors font-body text-body-lg" id="username" name="username" placeholder="Enter your username" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label text-label-md text-on-surface-variant pl-4" for="password">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full bg-surface-container-low border-none rounded-md py-4 pl-12 pr-12 text-on-surface placeholder:text-on-surface-variant/60 focus:ring-0 focus:bg-surface-container-highest transition-colors font-body text-body-lg" id="password" name="password" placeholder="Enter your password" type="password"/>
+<button aria-label="Toggle password visibility" class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex justify-end mt-[-0.5rem]">
+<a class="font-label text-label-md text-primary hover:text-primary-dim transition-colors" href="/forgot-password.html">Forgot password?</a>
+</div>
+<!-- Error Message Placeholder (Hidden by default, shown via logic usually, but structural placeholder provided) -->
+<div class="hidden bg-error-container/20 text-error rounded-md py-3 px-4 flex items-start gap-2">
+<span class="material-symbols-outlined text-[1.25rem]">error</span>
+<span class="font-body text-body-lg text-sm">Incorrect username or password.</span>
+</div>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-title-md py-4 rounded-full mt-2 hover:scale-[1.02] active:scale-95 transition-transform shadow-[0_8px_24px_rgba(0,107,27,0.2)] flex items-center justify-center gap-2" type="button">
+                        Đăng nhập
+                        <span class="material-symbols-outlined text-[1.25rem]">login</span>
+</button>
+</form>
+<div class="mt-8 text-center">
+<p class="font-body text-body-lg text-on-surface-variant">
+                        Chưa có tài khoản? 
+                        <a class="text-primary font-bold hover:text-primary-dim transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary/30 after:rounded-full hover:after:bg-primary transition-all" href="register.html">Đăng ký ngay</a>
+</p>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="mt-12 flex justify-center items-center gap-4 opacity-40">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 1;">eco</span>
+<div class="w-12 h-px bg-outline-variant/30"></div>
+<span class="material-symbols-outlined text-outline">favorite</span>
+<div class="w-12 h-px bg-outline-variant/30"></div>
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+</div>
+</main>
+<script>
+const API = 'http://localhost:8080';
+
+if (localStorage.getItem('token')) {
+  window.location.href = 'dashboard.html';
+}
+
+// Nút đăng nhập - lấy đúng bằng text content
+const allButtons = document.querySelectorAll('button');
+let loginBtn = null;
+let toggleBtn = null;
+
+allButtons.forEach(btn => {
+  if (btn.getAttribute('aria-label') === 'Toggle password visibility') {
+    toggleBtn = btn;
+  } else if (btn.textContent.includes('Đăng nhập')) {
+    loginBtn = btn;
+  }
+});
+
+
+
+// Xử lý đăng nhập
+if (loginBtn) {
+  loginBtn.addEventListener('click', async () => {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!username || !password) {
+      showError('Vui lòng nhập đầy đủ thông tin!');
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = 'Đang đăng nhập...';
+
+    try {
+      const res = await fetch(`${API}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const json = await res.json();
+
+     if (json.success) {
+    localStorage.setItem('token', json.data.token);
+    localStorage.setItem('user', JSON.stringify(json.data));
+
+    const role = json.data.role;
+    if (role === 'Admin' || role === 'Manager' || role === 'Employee') {
+        // Vào index.html nhưng mở sẵn trạng thái quản lý cửa hàng
+        localStorage.setItem('open_dashboard', 'true');
+        window.location.href = 'index.html';
+    } else {
+        // Customer → vào index bình thường
+        window.location.href = 'index.html';
+    }
+      
+      } else {
+        showError(json.message || 'Sai tên đăng nhập hoặc mật khẩu!');
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = 'Đăng nhập';
+      }
+    } catch (e) {
+      showError('Không kết nối được server!');
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = 'Đăng nhập';
+    }
+  });
+}
+
+// Toggle show/hide password - tách riêng hoàn toàn
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const input = document.getElementById('password');
+    const icon = toggleBtn.querySelector('span');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  });
+}
+
+// Enter để đăng nhập
+document.getElementById('password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') loginBtn && loginBtn.click();
+});
+document.getElementById('username').addEventListener('keydown', e => {
+  if (e.key === 'Enter') loginBtn && loginBtn.click();
+});
+
+// Ẩn lỗi khi nhập lại
+document.getElementById('username').addEventListener('input', () => {
+  const box = document.getElementById('err-box');
+  if (box) box.style.display = 'none';
+});
+document.getElementById('password').addEventListener('input', () => {
+  const box = document.getElementById('err-box');
+  if (box) box.style.display = 'none';
+});
+
+function showError(msg) {
+  let box = document.getElementById('err-box');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'err-box';
+    box.style.cssText = 'background:#fee2e2;color:#b91c1c;padding:12px 16px;border-radius:12px;font-size:14px;margin-top:8px;';
+    document.querySelector('form').appendChild(box);
+  }
+  box.textContent = '❌ ' + msg;
+  box.style.display = 'block';
+}
+</script>
+</body></html>

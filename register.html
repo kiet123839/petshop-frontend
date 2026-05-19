@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng ký - PetShop</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#001206",
+                        "background": "#ddffe2",
+                        "secondary-container": "#86faac",
+                        "on-background": "#0b361d",
+                        "secondary-dim": "#005c30",
+                        "on-surface": "#0b361d",
+                        "on-surface-variant": "#3b6447",
+                        "tertiary-fixed": "#11eaff",
+                        "on-primary-fixed": "#00480f",
+                        "error-container": "#f95630",
+                        "on-tertiary-fixed-variant": "#005c64",
+                        "surface": "#ddffe2",
+                        "on-primary": "#d1ffc8",
+                        "secondary-fixed": "#86faac",
+                        "tertiary": "#00656f",
+                        "inverse-primary": "#91f78e",
+                        "secondary": "#006a38",
+                        "tertiary-container": "#11eaff",
+                        "surface-bright": "#ddffe2",
+                        "on-tertiary": "#d4f9ff",
+                        "outline": "#568061",
+                        "on-primary-container": "#005e17",
+                        "on-secondary-container": "#005f32",
+                        "on-secondary": "#ccffd6",
+                        "on-secondary-fixed-variant": "#006a38",
+                        "on-primary-fixed-variant": "#00691a",
+                        "tertiary-dim": "#005861",
+                        "surface-container-highest": "#acecbb",
+                        "primary-dim": "#005d16",
+                        "on-secondary-fixed": "#004a26",
+                        "surface-dim": "#a0e4b1",
+                        "primary-fixed": "#91f78e",
+                        "surface-container-lowest": "#ffffff",
+                        "error-dim": "#b92902",
+                        "primary": "#006b1b",
+                        "surface-container-high": "#b5f0c2",
+                        "primary-fixed-dim": "#83e881",
+                        "surface-variant": "#acecbb",
+                        "primary-container": "#91f78e",
+                        "surface-container": "#bef5ca",
+                        "tertiary-fixed-dim": "#00dbee",
+                        "secondary-fixed-dim": "#77eb9f",
+                        "on-error": "#ffefec",
+                        "on-error-container": "#520c00",
+                        "surface-container-low": "#cafdd4",
+                        "surface-tint": "#006b1b",
+                        "on-tertiary-container": "#005159",
+                        "on-tertiary-fixed": "#003d43",
+                        "error": "#b02500",
+                        "inverse-on-surface": "#7ba785",
+                        "outline-variant": "#8bb795"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom overrides to ensure strict adherence to design system rules */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Soft entry input transitions */
+        .soft-input {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .soft-input:focus {
+            box-shadow: 0 0 0 4px rgba(139, 183, 149, 0.2); /* outline-variant at 20% */
+        }
+        
+        /* Ambient shadow for floating elements */
+        .ambient-shadow {
+            box-shadow: 0 16px 40px -12px rgba(11, 54, 29, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex items-center justify-center p-4 md:p-8 selection:bg-primary-container selection:text-on-primary-container">
+<!-- Main Registration Container -->
+<main class="w-full max-w-6xl bg-surface-container-lowest rounded-xl ambient-shadow flex flex-col lg:flex-row overflow-hidden relative">
+<!-- Decorative Background Elements (Breaking the box) -->
+<div class="absolute top-[-10%] left-[-5%] w-64 h-64 bg-surface-container-low rounded-full mix-blend-multiply filter blur-3xl opacity-50 pointer-events-none"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-80 h-80 bg-primary-container rounded-full mix-blend-multiply filter blur-3xl opacity-30 pointer-events-none"></div>
+<!-- Left Image Panel (Editorial Asymmetry) -->
+<div class="hidden lg:block lg:w-5/12 relative p-4">
+<div class="w-full h-full relative rounded-[2rem] overflow-hidden bg-surface-container-high">
+<img alt="Happy pets in a garden" class="absolute inset-0 w-full h-full object-cover" data-alt="Two cute energetic puppies running through a sun-drenched lush green grassy park with soft warm morning light and out-of-focus floral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnhwR2me-IQkUuDBA5xBw95NPXTCuk6qprs9X1iusyBivqT-PjkMsaLh_KlX_wAGzlwQZp_RliMTkZiae0HMBAvHehklVKvi3hQjDTinB3MHltMnFqTXmd-IxyJuJlXU4fxkVBOwK9du_Uk2q9oPbQqLfCN9aUGNKy3vkvI2_CZeR8dnvrvwGN2XTmAtGq3B57zwz0wabHBJoPJXsZj2L5-PBC0Ip1UKk3TA5u8tPGJUOucqaU0eMMAgarHQfZoxrbc6pbjnuT_zE"/>
+<!-- Soft gradient overlay for text readability if needed, but mostly for mood -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-10 left-8 right-8 text-center">
+<h3 class="font-headline text-2xl font-bold text-on-surface mb-2 tracking-tight">Chào mừng đến với Sanctuary</h3>
+<p class="font-body text-on-surface-variant font-medium">Nơi chăm sóc thú cưng trở thành một nghệ thuật sống.</p>
+</div>
+</div>
+</div>
+<!-- Right Form Panel -->
+<div class="w-full lg:w-7/12 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10">
+<!-- Logo area -->
+<div class="flex items-center gap-3 mb-10">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<h1 class="font-headline text-3xl font-extrabold text-primary tracking-tighter">PetShop</h1>
+</div>
+<div class="mb-8">
+<h2 class="font-headline text-4xl font-bold text-on-surface mb-3 tracking-tight">Tạo tài khoản mới</h2>
+<p class="font-body text-on-surface-variant text-lg">Tham gia cộng đồng yêu thú cưng của chúng tôi.</p>
+</div>
+<!-- Registration Form -->
+<form action="#" class="flex flex-col gap-6" method="POST">
+<!-- Full Name & Username Row -->
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-1 flex flex-col gap-2">
+<label class="font-label font-bold text-sm text-on-surface px-1" for="fullname">Họ và tên</label>
+<input class="soft-input w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-[1.5rem] px-5 py-4 outline-none border-none focus:bg-surface-container-highest" id="fullname" name="fullname" placeholder="Nhập họ và tên của bạn" required="" type="text"/>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<label class="font-label font-bold text-sm text-on-surface px-1" for="username">Tên đăng nhập</label>
+<input class="soft-input w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-[1.5rem] px-5 py-4 outline-none border-none focus:bg-surface-container-highest" id="username" minlength="3" name="username" placeholder="Tối thiểu 3 ký tự" required="" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div class="flex flex-col gap-2">
+<label class="font-label font-bold text-sm text-on-surface px-1" for="email">Email</label>
+<input class="soft-input w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-[1.5rem] px-5 py-4 outline-none border-none focus:bg-surface-container-highest" id="email" name="email" placeholder="ví dụ: yeuthucung@gmail.com" required="" type="email"/>
+</div>
+<!-- Passwords Row -->
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-1 flex flex-col gap-2">
+<label class="font-label font-bold text-sm text-on-surface px-1" for="password">Mật khẩu</label>
+<div class="relative">
+<input class="soft-input w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-[1.5rem] px-5 py-4 pr-12 outline-none border-none focus:bg-surface-container-highest" id="password" minlength="6" name="password" placeholder="Tối thiểu 6 ký tự" required="" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<label class="font-label font-bold text-sm text-on-surface px-1" for="confirm_password">Xác nhận mật khẩu</label>
+<input class="soft-input w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-[1.5rem] px-5 py-4 outline-none border-none focus:bg-surface-container-highest" id="confirm_password" minlength="6" name="confirm_password" placeholder="Nhập lại mật khẩu" required="" type="password"/>
+</div>
+</div>
+<!-- Terms Checkbox (Soft UI element) -->
+<div class="flex items-start gap-3 mt-2">
+<div class="relative flex items-center justify-center mt-1">
+<input class="peer appearance-none w-5 h-5 rounded-md bg-surface-container-low border-2 border-outline-variant/30 checked:bg-primary checked:border-primary transition-colors cursor-pointer" id="terms" required="" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-on-primary text-[16px] pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+<label class="font-body text-sm text-on-surface-variant leading-relaxed cursor-pointer select-none" for="terms">
+                        Tôi đồng ý với <a class="text-primary font-bold hover:underline" href="#">Điều khoản dịch vụ</a> và <a class="text-primary font-bold hover:underline" href="#">Chính sách bảo mật</a> của PetShop.
+                    </label>
+</div>
+<!-- Submit Button (Pebble Style with Gradient) -->
+<button class="mt-4 w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold text-lg py-4 px-8 rounded-full shadow-[0_8px_24px_rgba(0,107,27,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group" type="submit">
+<span>Đăng ký</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<!-- Login Link -->
+<div class="mt-10 text-center">
+<p class="font-body text-on-surface-variant">
+                    Đã có tài khoản? 
+                    <a class="text-primary font-bold hover:text-secondary-dim transition-colors ml-1 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all after:duration-300" href="login.html">
+                        Đăng nhập ngay
+                    </a>
+</p>
+</div>
+</div>
+</main>
+<script>
+const API = 'http://localhost:8080';
+
+// Nếu đã login rồi thì redirect
+if (localStorage.getItem('token')) {
+  window.location.href = 'dashboard.html';
+}
+
+// Xử lý submit form đăng ký
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fullName = document.getElementById('fullname').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const confirmPassword = document.getElementById('confirm_password').value.trim();
+  const btn = document.querySelector('button[type="submit"]');
+
+  // Validate confirm password
+  if (password !== confirmPassword) {
+    showError('Mật khẩu nhập lại không khớp!');
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined animate-spin">autorenew</span> Đang đăng ký...';
+
+  try {
+    const res = await fetch(`${API}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, password, fullName })
+    });
+    const json = await res.json();
+
+    if (json.success) {
+      // Hiện thông báo thành công
+      showSuccess('Đăng ký thành công! 🎉 Đang chuyển về trang đăng nhập...');
+      setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+    } else {
+      showError(json.message || 'Đăng ký thất bại, vui lòng thử lại!');
+      btn.disabled = false;
+      btn.innerHTML = '<span>Đăng ký</span><span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>';
+    }
+  } catch (e) {
+    showError('Không kết nối được server! Kiểm tra backend đang chạy chưa.');
+    btn.disabled = false;
+    btn.innerHTML = '<span>Đăng ký</span><span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>';
+  }
+});
+
+function showError(msg) {
+  let box = document.getElementById('msg-box');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'msg-box';
+    document.querySelector('form').prepend(box);
+  }
+  box.className = 'p-4 rounded-2xl text-sm font-medium mb-2 bg-red-50 text-red-700 border border-red-200';
+  box.textContent = '❌ ' + msg;
+  box.style.display = 'block';
+}
+
+function showSuccess(msg) {
+  let box = document.getElementById('msg-box');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'msg-box';
+    document.querySelector('form').prepend(box);
+  }
+  box.className = 'p-4 rounded-2xl text-sm font-medium mb-2 bg-green-50 text-green-700 border border-green-200';
+  box.textContent = msg;
+  box.style.display = 'block';
+}
+
+// Toggle password
+document.querySelector('button.absolute').addEventListener('click', function() {
+  const input = document.getElementById('password');
+  const icon = this.querySelector('span');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.textContent = 'visibility';
+  } else {
+    input.type = 'password';
+    icon.textContent = 'visibility_off';
+  }
+});
+</script>
+</body></html>

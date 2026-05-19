@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Liên hệ - Paw & Bloom</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "on-secondary": "#ffffff", "on-primary-fixed-variant": "#005301",
+        "on-background": "#171d15", "primary-fixed": "#8bfc75",
+        "inverse-on-surface": "#ecf3e4", "surface-variant": "#dee5d6",
+        "surface-tint": "#006e01", "surface-container-lowest": "#ffffff",
+        "inverse-surface": "#2c3229", "tertiary": "#8d4b51",
+        "tertiary-fixed": "#ffdadb", "tertiary-fixed-dim": "#ffb2b7",
+        "on-tertiary-fixed": "#3a0911", "surface-container-highest": "#dee5d6",
+        "primary-fixed-dim": "#6fdf5c", "on-error-container": "#93000a",
+        "surface-container-low": "#eff6e7", "on-surface-variant": "#3f4a3a",
+        "on-tertiary-container": "#7b3b42", "surface-container-high": "#e4eadc",
+        "on-secondary-container": "#406f35", "inverse-primary": "#6fdf5c",
+        "secondary": "#3a692f", "surface-container": "#e9f0e2",
+        "on-primary": "#ffffff", "on-primary-fixed": "#002200",
+        "secondary-container": "#baf1a8", "primary": "#006e01",
+        "on-surface": "#171d15", "error": "#ba1a1a",
+        "primary-container": "#69d957", "on-primary-container": "#005d01",
+        "on-tertiary-fixed-variant": "#71343a", "error-container": "#ffdad6",
+        "surface-dim": "#d5dcce", "on-secondary-fixed-variant": "#22511a",
+        "tertiary-container": "#ffaab0", "background": "#f5fced",
+        "surface-bright": "#f5fced", "outline-variant": "#becab5",
+        "on-tertiary": "#ffffff", "on-error": "#ffffff", "surface": "#f5fced",
+        "outline": "#6f7b68", "secondary-fixed": "#baf1a8",
+        "secondary-fixed-dim": "#9fd58e", "on-secondary-fixed": "#002200",
+      },
+      fontFamily: {
+        "headline": ["Plus Jakarta Sans"],
+        "body": ["Be Vietnam Pro"],
+      },
+      fontSize: {
+        "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600" }],
+        "body-lg":  ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "body-md":  ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+        "headline-lg": ["32px", { lineHeight: "1.3", fontWeight: "700" }],
+        "headline-md": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+        "headline-xl": ["48px", { lineHeight: "1.2", fontWeight: "700" }],
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: #f5fced; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+  .faq-answer.open { max-height: 300px; }
+  .faq-chevron { transition: transform 0.3s ease; }
+  .faq-chevron.open { transform: rotate(180deg); }
+</style>
+</head>
+<body class="text-on-surface min-h-screen flex flex-col antialiased">
+
+<!-- ═══ DESKTOP NAV (giống product_use) ═══ -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-emerald-100/40 shadow-sm shadow-emerald-900/5">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+
+    <!-- Logo -->
+    <div class="text-2xl font-bold text-emerald-900 italic" style="font-family:'Plus Jakarta Sans',sans-serif;">Paw &amp; Bloom</div>
+
+    <!-- Nav links -->
+    <div class="hidden md:flex space-x-1">
+      <a href="index.html" class="text-stone-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all px-3 py-2 text-sm font-medium" style="font-family:'Plus Jakarta Sans',sans-serif;">Home</a>
+      <a href="product_use.html" class="text-stone-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all px-3 py-2 text-sm font-medium" style="font-family:'Plus Jakarta Sans',sans-serif;">Shop</a>
+      <a href="services_use.html" class="text-stone-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all px-3 py-2 text-sm font-medium" style="font-family:'Plus Jakarta Sans',sans-serif;">Spa &amp; Grooming</a>
+      <a href="contact.html" class="text-emerald-700 border-b-2 border-emerald-600 pb-1 font-semibold tracking-tight px-3 py-2 text-sm" style="font-family:'Plus Jakarta Sans',sans-serif;">Contact</a>
+    </div>
+
+    <!-- Right side -->
+    <div class="flex items-center space-x-3">
+      <!-- Login button -->
+      <a href="login.html" id="btn-login-ct"
+         class="hidden items-center gap-1.5 bg-primary text-on-primary font-semibold text-sm px-4 py-2 rounded-full hover:scale-95 active:scale-90 transition-transform shadow-sm"
+         style="font-family:'Plus Jakarta Sans',sans-serif;">
+        <span class="material-symbols-outlined text-base" style="font-size:16px;">login</span>
+        Đăng nhập
+      </a>
+
+      <!-- Avatar + Dropdown -->
+      <div class="relative" id="avatar-wrapper-ct" style="display:none;">
+        <button id="avatar-btn-ct"
+                class="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-emerald-50 border border-transparent hover:border-emerald-200 transition-all cursor-pointer group">
+          <div id="avatar-circle-ct"
+               class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all"
+               style="font-family:'Plus Jakarta Sans',sans-serif;">?</div>
+          <span id="avatar-name-ct" class="text-sm font-semibold text-on-surface hidden sm:block" style="font-family:'Plus Jakarta Sans',sans-serif;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+          <span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 text-base" id="avatar-chevron-ct" style="font-size:18px;">expand_more</span>
+        </button>
+
+        <!-- Dropdown -->
+        <div id="avatar-dropdown-ct" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-[0_8px_32px_rgba(23,29,21,0.12)] border border-surface-variant overflow-hidden z-50">
+          <div class="px-4 py-3 bg-surface-container-low border-b border-surface-variant">
+            <p class="text-xs text-on-surface-variant font-medium">Đã đăng nhập với</p>
+            <p id="dropdown-username-ct" class="text-sm font-bold text-on-surface truncate mt-0.5" style="font-family:'Plus Jakarta Sans',sans-serif;"></p>
+            <p id="dropdown-role-ct" class="text-xs text-primary font-semibold mt-0.5"></p>
+          </div>
+          <div class="py-1">
+            
+            <a href="dashboard.html" id="dropdown-dashboard-ct"
+               class="hidden items-center gap-3 px-4 py-2.5 text-sm text-emerald-700 font-semibold hover:bg-emerald-50 transition-colors">
+              <span class="material-symbols-outlined text-emerald-600" style="font-size:18px;">storefront</span>
+              Quản lý cửa hàng
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-low transition-colors">
+              <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px;">settings</span>
+              Cài đặt
+            </a>
+          </div>
+          <div class="border-t border-surface-variant py-1">
+            <button id="btn-logout-ct"
+                    class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-error hover:bg-error-container/30 transition-colors">
+              <span class="material-symbols-outlined text-error" style="font-size:18px;">logout</span>
+              Đăng xuất
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE NAV ═══ -->
+<nav class="md:hidden bg-white fixed top-0 w-full z-50 border-b border-stone-100 shadow-sm">
+  <div class="flex justify-between items-center px-4 h-14">
+    <a class="text-xl font-extrabold text-emerald-800 italic" href="index.html" style="font-family:'Plus Jakarta Sans',sans-serif;">Paw &amp; Bloom</a>
+    <span class="text-sm font-semibold text-emerald-700">Liên hệ</span>
+  </div>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<main class="flex-grow pt-24 md:pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto w-full">
+
+  <!-- Header -->
+  <section class="text-center mb-12">
+    <div class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+      <span class="material-symbols-outlined text-base" style="font-size:16px;">pets</span>
+      Chúng tôi luôn lắng nghe bạn
+    </div>
+    <h1 class="font-headline text-4xl md:text-5xl font-bold text-primary mb-3" style="font-family:'Plus Jakarta Sans',sans-serif;">Liên hệ với chúng tôi</h1>
+    <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">Hãy chia sẻ với chúng tôi bất kỳ thắc mắc, yêu cầu hay phản hồi nào. Chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
+  </section>
+
+  <!-- Bento Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
+
+    <!-- Form (left) -->
+    <div class="lg:col-span-7 bg-surface-container-lowest rounded-2xl shadow-[0_8px_30px_rgba(74,68,63,0.08)] p-6 md:p-10 border border-surface-variant">
+      <h2 class="font-headline text-headline-lg text-on-surface mb-6" style="font-family:'Plus Jakarta Sans',sans-serif;">Gửi tin nhắn cho chúng tôi</h2>
+
+      <!-- Alert thành công -->
+      <div id="success-alert" class="hidden mb-6 bg-secondary-container text-on-secondary-container rounded-xl px-5 py-4 flex items-start gap-3">
+        <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings:'FILL' 1;font-size:20px;">check_circle</span>
+        <div>
+          <p class="font-semibold text-sm">Gửi thành công!</p>
+          <p class="text-sm opacity-80 mt-0.5">Chúng tôi đã nhận được tin nhắn của bạn và sẽ phản hồi sớm nhất có thể.</p>
+        </div>
+      </div>
+
+      <!-- Alert lỗi -->
+      <div id="error-alert" class="hidden mb-6 bg-error-container text-on-error-container rounded-xl px-5 py-4 flex items-start gap-3">
+        <span class="material-symbols-outlined mt-0.5" style="font-variation-settings:'FILL' 1;font-size:20px;">error</span>
+        <div>
+          <p class="font-semibold text-sm">Gửi thất bại!</p>
+          <p class="text-sm opacity-80 mt-0.5" id="error-msg">Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua email.</p>
+        </div>
+      </div>
+
+      <form id="contact-form" class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-label-md text-on-surface-variant mb-1.5" for="fullName">Họ và tên <span class="text-error">*</span></label>
+            <input class="w-full bg-surface text-on-surface border border-outline-variant rounded-xl px-4 py-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-sm" id="fullName" placeholder="Nguyễn Văn A" type="text" required/>
+          </div>
+          <div>
+            <label class="block text-label-md text-on-surface-variant mb-1.5" for="phone">Số điện thoại</label>
+            <input class="w-full bg-surface text-on-surface border border-outline-variant rounded-xl px-4 py-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-sm" id="phone" placeholder="090 123 4567" type="tel"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-label-md text-on-surface-variant mb-1.5" for="email">Email <span class="text-error">*</span></label>
+          <input class="w-full bg-surface text-on-surface border border-outline-variant rounded-xl px-4 py-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-sm" id="email" placeholder="email@example.com" type="email" required/>
+        </div>
+
+        <div>
+          <label class="block text-label-md text-on-surface-variant mb-1.5" for="subject">Chủ đề</label>
+          <div class="relative">
+            <select class="w-full bg-surface text-on-surface border border-outline-variant rounded-xl px-4 py-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-sm appearance-none pr-10" id="subject">
+              <option>Đặt lịch Spa & Grooming</option>
+              <option>Tư vấn sản phẩm</option>
+              <option>Phản hồi dịch vụ</option>
+              <option>Hỗ trợ đơn hàng</option>
+              <option>Hợp tác kinh doanh</option>
+              <option>Khác</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" style="font-size:18px;">expand_more</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-label-md text-on-surface-variant mb-1.5" for="message">Tin nhắn <span class="text-error">*</span></label>
+          <textarea class="w-full bg-surface text-on-surface border border-outline-variant rounded-xl px-4 py-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors resize-none text-sm" id="message" placeholder="Hãy chia sẻ chi tiết yêu cầu của bạn..." rows="5" required></textarea>
+        </div>
+
+        <button id="submit-btn" type="submit"
+                class="w-full bg-primary text-on-primary font-semibold py-4 rounded-xl hover:bg-on-primary-container hover:text-on-surface transition-all active:scale-[0.98] flex justify-center items-center gap-2 shadow-[0_4px_16px_rgba(0,110,1,0.25)]"
+                style="font-family:'Plus Jakarta Sans',sans-serif;">
+          <span id="btn-text">Gửi tin nhắn</span>
+          <span id="btn-icon" class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">send</span>
+          <span id="btn-loading" class="hidden animate-spin material-symbols-outlined text-[20px]">progress_activity</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Info + Map (right) -->
+    <div class="lg:col-span-5 flex flex-col gap-5">
+
+      <!-- Contact info card -->
+      <div class="bg-secondary-container text-on-secondary-container rounded-2xl p-6 shadow-[0_8px_30px_rgba(74,68,63,0.08)]">
+        <h3 class="font-semibold text-headline-md mb-5" style="font-family:'Plus Jakarta Sans',sans-serif;">Thông tin liên hệ</h3>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="bg-white/40 p-2 rounded-full mt-0.5">
+              <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;font-size:20px;">location_on</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">Địa chỉ cửa hàng</p>
+              <p class="text-sm mt-1 opacity-90">123 Đường Thú Cưng, Quận Xanh, TP. Hồ Chí Minh</p>
+              <a class="inline-block mt-1.5 text-xs font-semibold text-primary hover:underline" href="#">Xem trên Google Maps →</a>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="bg-white/40 p-2 rounded-full mt-0.5">
+              <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;font-size:20px;">call</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">Hotline hỗ trợ</p>
+              <p class="text-sm mt-1 opacity-90">1900 8888 (Miễn phí)</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="bg-white/40 p-2 rounded-full mt-0.5">
+              <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;font-size:20px;">mail</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">Email</p>
+              <p class="text-sm mt-1 opacity-90">khoautcit27@gmail.com</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="bg-white/40 p-2 rounded-full mt-0.5">
+              <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;font-size:20px;">schedule</span>
+            </div>
+            <div>
+              <p class="font-semibold text-sm">Giờ làm việc</p>
+              <p class="text-sm mt-1 opacity-90">Thứ 2 – Chủ Nhật: 8:00 – 21:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="flex-grow bg-surface-container-lowest rounded-2xl shadow-[0_8px_30px_rgba(74,68,63,0.08)] border border-surface-variant overflow-hidden relative min-h-[220px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4!2d106.6946541!3d10.7769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzM3LjAiTiAxMDbCsDQxJzQwLjgiRQ!5e0!3m2!1svi!2svn!4v1620000000000!5m2!1svi!2svn"
+          class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="absolute bottom-3 left-3">
+          <span class="bg-white text-primary font-semibold text-xs px-3 py-1.5 rounded-full shadow flex items-center gap-1.5">
+            <span class="material-symbols-outlined" style="font-size:14px;">pin_drop</span>
+            Paw &amp; Bloom
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="max-w-3xl mx-auto">
+    <h2 class="font-headline text-headline-lg text-center text-primary mb-8" style="font-family:'Plus Jakarta Sans',sans-serif;">Câu hỏi thường gặp</h2>
+    <div class="space-y-3" id="faq-list">
+
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left faq-toggle">
+          <span class="font-semibold text-on-surface text-sm" style="font-family:'Plus Jakarta Sans',sans-serif;">Paw & Bloom có giao hàng hỏa tốc không?</span>
+          <span class="material-symbols-outlined text-outline faq-chevron flex-shrink-0 ml-3" style="font-size:20px;">expand_more</span>
+        </button>
+        <div class="faq-answer px-6 text-on-surface-variant text-sm">
+          <p class="pb-4">Có, chúng tôi cung cấp dịch vụ giao hàng hỏa tốc trong vòng 2 giờ cho các đơn hàng nội thành. Chi phí tính theo khoảng cách từ cửa hàng đến địa chỉ của bạn.</p>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left faq-toggle">
+          <span class="font-semibold text-on-surface text-sm" style="font-family:'Plus Jakarta Sans',sans-serif;">Tôi có cần đặt lịch trước khi đến Spa không?</span>
+          <span class="material-symbols-outlined text-outline faq-chevron flex-shrink-0 ml-3" style="font-size:20px;">expand_more</span>
+        </button>
+        <div class="faq-answer px-6 text-on-surface-variant text-sm">
+          <p class="pb-4">Khuyến khích đặt lịch trước ít nhất 1 ngày để thú cưng được phục vụ tốt nhất mà không phải chờ đợi. Bạn có thể đặt qua form liên hệ trên hoặc hotline.</p>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left faq-toggle">
+          <span class="font-semibold text-on-surface text-sm" style="font-family:'Plus Jakarta Sans',sans-serif;">Làm sao để hủy hoặc dời lịch hẹn Spa?</span>
+          <span class="material-symbols-outlined text-outline faq-chevron flex-shrink-0 ml-3" style="font-size:20px;">expand_more</span>
+        </button>
+        <div class="faq-answer px-6 text-on-surface-variant text-sm">
+          <p class="pb-4">Gọi trực tiếp vào hotline hoặc nhắn qua fanpage/Zalo trước ít nhất 4 tiếng so với giờ hẹn. Chúng tôi sẽ sắp xếp lịch mới phù hợp cho bạn.</p>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left faq-toggle">
+          <span class="font-semibold text-on-surface text-sm" style="font-family:'Plus Jakarta Sans',sans-serif;">Sản phẩm của Paw & Bloom có an toàn cho thú cưng không?</span>
+          <span class="material-symbols-outlined text-outline faq-chevron flex-shrink-0 ml-3" style="font-size:20px;">expand_more</span>
+        </button>
+        <div class="faq-answer px-6 text-on-surface-variant text-sm">
+          <p class="pb-4">100% sản phẩm được kiểm định an toàn, không chứa hóa chất độc hại. Chúng tôi ưu tiên các nguyên liệu hữu cơ, thân thiện với thú cưng và môi trường.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-10 bg-stone-50 border-t border-stone-200 mt-8">
+  <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-8 gap-4">
+    <div class="text-lg font-bold text-emerald-800 italic" style="font-family:'Plus Jakarta Sans',sans-serif;">Paw &amp; Bloom</div>
+    <div class="flex flex-wrap justify-center gap-4 text-xs text-stone-500">
+      <a class="hover:text-emerald-600 transition-colors" href="#">Privacy Policy</a>
+      <a class="hover:text-emerald-600 transition-colors" href="#">Terms of Service</a>
+      <a class="hover:text-emerald-600 transition-colors" href="#">Shipping Info</a>
+      <a class="hover:text-emerald-600 transition-colors" href="#">Returns</a>
+    </div>
+    <div class="text-xs text-stone-500">© 2024 Paw &amp; Bloom. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+// EMAILJS CONFIG
+// Hướng dẫn setup ở cuối file
+// ═══════════════════════════════════════════
+const EMAILJS_SERVICE_ID  = 'service_dgl5phx';   // thay sau khi đăng ký EmailJS
+const EMAILJS_TEMPLATE_ID = 'template_qjk6eae';  // thay sau khi tạo template
+const EMAILJS_PUBLIC_KEY  = 'v4PubNciKQ6N8lxpU';   // thay sau khi đăng ký EmailJS
+
+(function() { emailjs.init(EMAILJS_PUBLIC_KEY); })();
+
+// ═══ FORM SUBMIT ═══
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const fullName = document.getElementById('fullName').value.trim();
+  const phone    = document.getElementById('phone').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const subject  = document.getElementById('subject').value;
+  const message  = document.getElementById('message').value.trim();
+
+  if (!fullName || !email || !message) {
+    showError('Vui lòng điền đầy đủ các trường bắt buộc (*)');
+    return;
+  }
+
+  // Loading state
+  setLoading(true);
+  hideAlerts();
+
+  const templateParams = {
+    from_name:    fullName,
+    from_email:   email,
+    phone:        phone || 'Không có',
+    subject:      subject,
+    message:      message,
+    to_email:     'khoautcit27@gmail.com',
+    reply_to:     email,
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    showSuccess();
+    document.getElementById('contact-form').reset();
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    showError('Không thể gửi email. Vui lòng thử lại hoặc liên hệ trực tiếp: khoautcit27@gmail.com');
+  } finally {
+    setLoading(false);
+  }
+});
+
+function setLoading(on) {
+  const btn  = document.getElementById('submit-btn');
+  const text = document.getElementById('btn-text');
+  const icon = document.getElementById('btn-icon');
+  const spin = document.getElementById('btn-loading');
+  btn.disabled = on;
+  text.textContent = on ? 'Đang gửi...' : 'Gửi tin nhắn';
+  icon.classList.toggle('hidden', on);
+  spin.classList.toggle('hidden', !on);
+}
+
+function hideAlerts() {
+  document.getElementById('success-alert').classList.add('hidden');
+  document.getElementById('error-alert').classList.add('hidden');
+}
+
+function showSuccess() {
+  document.getElementById('success-alert').classList.remove('hidden');
+  document.getElementById('success-alert').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function showError(msg) {
+  document.getElementById('error-msg').textContent = msg;
+  document.getElementById('error-alert').classList.remove('hidden');
+}
+
+// ═══ FAQ TOGGLE ═══
+document.querySelectorAll('.faq-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer  = btn.nextElementSibling;
+    const chevron = btn.querySelector('.faq-chevron');
+    answer.classList.toggle('open');
+    chevron.classList.toggle('open');
+  });
+});
+
+// ═══ NAV AUTH ═══
+const STAFF_ROLES = ['Admin', 'Manager', 'Employee'];
+const token    = localStorage.getItem('token');
+const userData = JSON.parse(localStorage.getItem('user') || 'null');
+const btnLogin = document.getElementById('btn-login-ct');
+const avatarWrapper = document.getElementById('avatar-wrapper-ct');
+
+if (token && userData) {
+  btnLogin.style.display = 'none';
+  avatarWrapper.style.display = 'flex';
+  avatarWrapper.style.alignItems = 'center';
+
+  const displayName = userData.fullName || userData.username || 'U';
+  document.getElementById('avatar-circle-ct').textContent = displayName.charAt(0).toUpperCase();
+  document.getElementById('avatar-name-ct').textContent   = displayName.length > 16 ? displayName.slice(0,14) + '…' : displayName;
+  document.getElementById('dropdown-username-ct').textContent = userData.username || userData.email || displayName;
+  document.getElementById('dropdown-role-ct').textContent = userData.role ? 'Vai trò: ' + userData.role : '';
+
+  if (STAFF_ROLES.includes(userData.role)) {
+    const dd = document.getElementById('dropdown-dashboard-ct');
+    dd.classList.remove('hidden');
+    dd.style.display = 'flex';
+  }
+} else {
+  btnLogin.style.display = 'inline-flex';
+  avatarWrapper.style.display = 'none';
+}
+
+// Avatar dropdown toggle
+const avatarBtn  = document.getElementById('avatar-btn-ct');
+const dropdownEl = document.getElementById('avatar-dropdown-ct');
+const chevronEl  = document.getElementById('avatar-chevron-ct');
+let dropOpen = false;
+
+avatarBtn && avatarBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dropOpen = !dropOpen;
+  dropdownEl.classList.toggle('hidden', !dropOpen);
+  chevronEl.style.transform = dropOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+});
+
+document.addEventListener('click', () => {
+  if (dropOpen) {
+    dropOpen = false;
+    dropdownEl.classList.add('hidden');
+    chevronEl.style.transform = 'rotate(0deg)';
+  }
+});
+
+// Logout
+document.getElementById('btn-logout-ct') && document.getElementById('btn-logout-ct').addEventListener('click', () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  window.location.href = 'login.html';
+});
+</script>
+
+<!--
+═══════════════════════════════════════════════════════
+HƯỚNG DẪN CÀI ĐẶT EMAILJS (để gửi mail đến khoautcit27@gmail.com)
+═══════════════════════════════════════════════════════
+
+1. Vào https://www.emailjs.com → Đăng ký tài khoản miễn phí
+
+2. Tạo Email Service:
+   - Dashboard → Email Services → Add New Service
+   - Chọn Gmail → kết nối tài khoản khoautcit27@gmail.com
+   - Copy SERVICE_ID → thay vào EMAILJS_SERVICE_ID
+
+3. Tạo Email Template:
+   - Dashboard → Email Templates → Create New Template
+   - To Email: khoautcit27@gmail.com
+   - Subject: {{subject}} - Liên hệ từ {{from_name}}
+   - Body:
+       Họ tên: {{from_name}}
+       Email: {{from_email}}
+       SĐT: {{phone}}
+       Chủ đề: {{subject}}
+       Tin nhắn: {{message}}
+   - Copy TEMPLATE_ID → thay vào EMAILJS_TEMPLATE_ID
+
+4. Lấy Public Key:
+   - Dashboard → Account → General → Public Key
+   - Copy → thay vào EMAILJS_PUBLIC_KEY
+
+5. Thay 3 giá trị trong script:
+   const EMAILJS_SERVICE_ID  = 'service_xxxxxxx';
+   const EMAILJS_TEMPLATE_ID = 'template_xxxxxxx';
+   const EMAILJS_PUBLIC_KEY  = 'xxxxxxxxxxxxxxxx';
+═══════════════════════════════════════════════════════
+-->
+</body>
+</html>
