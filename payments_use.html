@@ -5,62 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Thanh toán - Paw & Bloom</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+ <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/aida-public/AB6AXuAjxsv1sDegtLpPWKi9JhyjFJYOzOM__72QTPViEhhpQ8tKfLEEMqZlKD_W_Tud0i4MaludNLc90WItlr0vndPUCTGvUxtq-9-TzE2ShYggMJyvzXtpHrBYJOV1w4utsbNxS6px-CPnwwnz8LEZnRCVthV8KybcO8AaD3lQDQ2BZ5Xjji2dZNoGPxC3hgy2Y7_g3rcSnbhybndO6wIii7o2WcMAyBaee6tSDSYg2fDT1rHJaCKwEUJkLMkYYTdTKgz1JkgAkMcDzOc">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"/>
 <script>
 tailwind.config = {
   theme: {
     extend: {
       colors: {
-        primary: '#006e01',
-        surface: '#fcffdc',
+        primary: '#735c00',
+        surface: '#fcf9f8',
         card: '#ffffff',
-        muted: '#667085',
-        line: '#dfe7c7',
-        accent: '#d97757',
+        muted: '#7f7663',
+        line: '#d0c5af',
+        accent: '#d4af37',
+        "primary-container": "#ffe088",
+        "surface-container": "#f0edec",
+        "surface-container-low": "#f6f3f2",
       },
-      fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
+      },
     }
   }
 };
 </script>
+<style>
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #fcf9f8; }
+  ::-webkit-scrollbar-thumb { background: #d0c5af; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #735c00; }
+  .glass-panel {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(208,197,175,0.5);
+    box-shadow: 0 8px 32px rgba(115,92,0,0.08), 0 2px 8px rgba(17,17,17,0.04);
+  }
+  .pay-method-active { border: 2px solid #735c00 !important; background: #fef8e6 !important; }
+  .pay-method-active .method-icon { color: #735c00 !important; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  #toast { transition: opacity 0.3s, transform 0.3s; }
+</style>
 </head>
 <body class="min-h-screen bg-surface text-stone-900 font-sans">
-<header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-line">
+<header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-line shadow-sm">
   <div class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-    <a href="product_use.html" class="flex items-center gap-3 font-extrabold text-primary text-lg">
-      <span class="material-symbols-outlined">pets</span>
-      Paw & Bloom
+    <a href="product_use.html" class="flex items-center gap-2 font-bold text-primary text-lg" style="font-family:'Playfair Display',serif;">
+      <span class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary" style="font-size:18px;">pets</span>
+      </span>
+      PET LUXURY
     </a>
     <nav class="hidden sm:flex items-center gap-2 text-sm font-semibold text-stone-600">
-      <a class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-primary" href="product_use.html">Shop</a>
-      <a class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-primary" href="services_use.html">Spa</a>
+      <a class="px-3 py-2 rounded-lg hover:bg-amber-50 hover:text-primary transition-all" href="product_use.html">Shop</a>
+      <a class="px-3 py-2 rounded-lg hover:bg-amber-50 hover:text-primary transition-all" href="services_use.html">Spa</a>
     </nav>
   </div>
 </header>
 
 <main class="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
-  <div id="emptyState" class="hidden max-w-xl mx-auto bg-white rounded-xl border border-line p-8 text-center shadow-sm">
-    <div class="w-16 h-16 rounded-full bg-emerald-50 text-primary mx-auto flex items-center justify-center mb-4">
+  <div id="emptyState" class="hidden max-w-xl mx-auto bg-white rounded-xl border border-line p-8 text-center glass-panel">
+    <div class="w-16 h-16 rounded-full bg-primary-container text-primary mx-auto flex items-center justify-center mb-4">
       <span class="material-symbols-outlined text-3xl">receipt_long</span>
     </div>
-    <h1 class="text-2xl font-extrabold mb-2">Chưa có thông tin thanh toán</h1>
+    <h1 class="text-2xl font-bold mb-2" style="font-family:'Playfair Display',serif;">Chưa có thông tin thanh toán</h1>
     <p class="text-muted mb-6">Vui lòng quay lại shop hoặc trang dịch vụ để chọn sản phẩm/dịch vụ trước.</p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="product_use.html" class="px-5 py-3 rounded-lg bg-primary text-white font-bold">Quay lại Shop</a>
-      <a href="services_use.html" class="px-5 py-3 rounded-lg border border-line bg-white font-bold text-stone-700">Đặt dịch vụ</a>
+      <a href="product_use.html" class="px-5 py-3 rounded-lg bg-primary text-white font-bold hover:opacity-90 transition">Quay lại Shop</a>
+      <a href="services_use.html" class="px-5 py-3 rounded-lg border border-line bg-white font-bold text-stone-700 hover:bg-amber-50 transition">Đặt dịch vụ</a>
     </div>
   </div>
 
   <section id="checkoutPage" class="hidden grid lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8">
     <div class="space-y-6">
-      <div class="bg-white rounded-xl border border-line p-5 md:p-6 shadow-sm">
+      <div class="bg-white rounded-xl border border-line p-5 md:p-6 glass-panel">
         <div class="flex items-start justify-between gap-4 mb-5">
           <div>
-            <p class="text-sm font-bold text-primary mb-1">Thanh toán đơn hàng</p>
-            <h1 id="orderTitle" class="text-2xl md:text-3xl font-extrabold tracking-tight">Đơn hàng</h1>
+            <p class="text-sm font-semibold text-primary mb-1">Thanh toán đơn hàng</p>
+            <h1 id="orderTitle" class="text-2xl md:text-3xl font-bold tracking-tight" style="font-family:'Playfair Display',serif;">Đơn hàng</h1>
           </div>
-          <span id="typeBadge" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-primary text-xs font-bold"></span>
+          <span id="typeBadge" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container text-primary text-xs font-bold"></span>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-4">
@@ -75,56 +101,51 @@ tailwind.config = {
         </div>
       </div>
 
-      <div class="bg-white rounded-xl border border-line p-5 md:p-6 shadow-sm">
-        <h2 class="text-lg font-extrabold mb-4">Phương thức thanh toán</h2>
-        <div class="grid sm:grid-cols-3 gap-3" id="methodList">
-          <button data-method="Cash" class="pay-method rounded-xl border-2 border-primary bg-emerald-50 p-4 text-left transition">
-            <span class="material-symbols-outlined text-primary">payments</span>
+      <div class="bg-white rounded-xl border border-line p-5 md:p-6 glass-panel">
+        <h2 class="text-lg font-bold mb-4" style="font-family:'Playfair Display',serif;">Phương thức thanh toán</h2>
+        <div class="grid sm:grid-cols-2 gap-3" id="methodList">
+          <button data-method="Cash" class="pay-method pay-method-active rounded-xl border-2 border-primary bg-amber-50 p-4 text-left transition">
+            <span class="material-symbols-outlined method-icon text-primary">payments</span>
             <span class="block font-bold mt-2">Tiền mặt</span>
             <span class="block text-xs text-muted mt-1">Thanh toán khi nhận hàng</span>
           </button>
-          <button data-method="BankTransfer" class="pay-method rounded-xl border border-line bg-white p-4 text-left transition hover:bg-stone-50">
-            <span class="material-symbols-outlined text-stone-600">account_balance</span>
-            <span class="block font-bold mt-2">Chuyển khoản</span>
-            <span class="block text-xs text-muted mt-1">Xác nhận tự động</span>
-          </button>
-          <button data-method="QRCode" class="pay-method rounded-xl border border-line bg-white p-4 text-left transition hover:bg-stone-50">
-            <span class="material-symbols-outlined text-stone-600">qr_code_2</span>
+          <button data-method="QRCode" class="pay-method rounded-xl border border-line bg-white p-4 text-left transition hover:bg-amber-50">
+            <span class="material-symbols-outlined method-icon text-stone-600">qr_code_2</span>
             <span class="block font-bold mt-2">VNPay</span>
             <span class="block text-xs text-muted mt-1">Thanh toán online qua VNPay</span>
           </button>
         </div>
       </div>
 
-      <div id="successBox" class="hidden bg-white rounded-xl border border-emerald-200 p-6 shadow-sm">
+      <div id="successBox" class="hidden bg-white rounded-xl border border-amber-200 p-6 glass-panel">
         <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-full bg-emerald-50 text-primary flex items-center justify-center">
+          <div class="w-12 h-12 rounded-full bg-primary-container text-primary flex items-center justify-center">
             <span class="material-symbols-outlined">check_circle</span>
           </div>
           <div class="flex-1">
-            <h2 class="text-xl font-extrabold mb-1">Thanh toán thành công</h2>
+            <h2 class="text-xl font-bold mb-1" style="font-family:'Playfair Display',serif;">Thanh toán thành công</h2>
             <p id="successText" class="text-muted"></p>
             <div class="flex flex-wrap gap-3 mt-5">
-              <a href="product_use.html" class="px-4 py-2.5 rounded-lg bg-primary text-white font-bold text-sm">Tiếp tục mua sắm</a>
-              <a href="index.html" class="px-4 py-2.5 rounded-lg border border-line bg-white font-bold text-sm">Về trang chủ</a>
+              <a href="product_use.html" class="px-4 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:opacity-90 transition">Tiếp tục mua sắm</a>
+              <a href="index.html" class="px-4 py-2.5 rounded-lg border border-line bg-white font-bold text-sm hover:bg-amber-50 transition">Về trang chủ</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <aside class="bg-white rounded-xl border border-line p-5 md:p-6 shadow-sm h-fit lg:sticky lg:top-24">
-      <h2 class="text-lg font-extrabold mb-4">Tóm tắt</h2>
+    <aside class="bg-white rounded-xl border border-line p-5 md:p-6 glass-panel h-fit lg:sticky lg:top-24">
+      <h2 class="text-lg font-bold mb-4" style="font-family:'Playfair Display',serif;">Tóm tắt</h2>
       <div id="itemList" class="space-y-3 mb-5"></div>
       <div class="space-y-3 border-t border-line pt-4 text-sm">
         <div class="flex justify-between"><span class="text-muted">Tạm tính</span><span id="subtotal" class="font-bold"></span></div>
         <div class="flex justify-between"><span class="text-muted">Phí giao hàng</span><span id="shippingFee" class="font-bold"></span></div>
         <div class="flex justify-between text-lg border-t border-line pt-4">
-          <span class="font-extrabold">Tổng thanh toán</span>
-          <span id="totalAmount" class="font-extrabold text-primary"></span>
+          <span class="font-bold">Tổng thanh toán</span>
+          <span id="totalAmount" class="font-bold text-primary"></span>
         </div>
       </div>
-      <button id="payBtn" onclick="completePayment()" class="mt-6 w-full rounded-xl bg-primary text-white py-3.5 font-extrabold hover:bg-emerald-800 active:scale-[0.99] transition flex items-center justify-center gap-2">
+      <button id="payBtn" onclick="completePayment()" class="mt-6 w-full rounded-xl bg-primary text-white py-3.5 font-bold hover:opacity-90 active:scale-[0.99] transition flex items-center justify-center gap-2">
         <span class="material-symbols-outlined">lock</span>
         Xác nhận thanh toán
       </button>
@@ -193,12 +214,12 @@ function renderCheckout() {
     ? context.items.map(item => {
         const qty = Number(item.qty || item.quantity || 1);
         return `
-          <div class="flex items-start justify-between gap-3 rounded-lg bg-stone-50 p-3">
+          <div class="flex items-start justify-between gap-3 rounded-lg bg-surface-container-low p-3">
             <div class="min-w-0">
               <p class="font-bold text-sm truncate">${item.name || item.productName || 'Mục thanh toán'}</p>
               <p class="text-xs text-muted mt-1">SL: ${qty}${item.unit ? ' / ' + item.unit : ''}</p>
             </div>
-            <span class="font-bold text-sm whitespace-nowrap">${fmtVND(Number(item.price || 0) * qty)}</span>
+            <span class="font-bold text-sm whitespace-nowrap text-primary">${fmtVND(Number(item.price || 0) * qty)}</span>
           </div>`;
       }).join('')
     : '<p class="text-sm text-muted bg-stone-50 rounded-lg p-3">Không có chi tiết sản phẩm/dịch vụ.</p>';
@@ -208,12 +229,16 @@ function setMethod(method) {
   selectedMethod = method;
   document.querySelectorAll('.pay-method').forEach(button => {
     const active = button.dataset.method === method;
-    button.className = active
-      ? 'pay-method rounded-xl border-2 border-primary bg-emerald-50 p-4 text-left transition'
-      : 'pay-method rounded-xl border border-line bg-white p-4 text-left transition hover:bg-stone-50';
-    button.querySelector('.material-symbols-outlined').className = active
-      ? 'material-symbols-outlined text-primary'
-      : 'material-symbols-outlined text-stone-600';
+    if (active) {
+      button.classList.add('pay-method-active');
+      button.classList.remove('border-line', 'bg-white');
+      button.classList.add('border-primary', 'bg-amber-50');
+    } else {
+      button.classList.remove('pay-method-active', 'border-primary', 'bg-amber-50');
+      button.classList.add('border-line', 'bg-white');
+    }
+    const icon = button.querySelector('.method-icon');
+    if (icon) icon.className = active ? 'material-symbols-outlined method-icon text-primary' : 'material-symbols-outlined method-icon text-stone-600';
   });
 
   const payBtn = document.getElementById('payBtn');

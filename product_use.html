@@ -5,7 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Shop - Paw &amp; Bloom</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet"/>
+ <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/aida-public/AB6AXuAjxsv1sDegtLpPWKi9JhyjFJYOzOM__72QTPViEhhpQ8tKfLEEMqZlKD_W_Tud0i4MaludNLc90WItlr0vndPUCTGvUxtq-9-TzE2ShYggMJyvzXtpHrBYJOV1w4utsbNxS6px-CPnwwnz8LEZnRCVthV8KybcO8AaD3lQDQ2BZ5Xjji2dZNoGPxC3hgy2Y7_g3rcSnbhybndO6wIii7o2WcMAyBaee6tSDSYg2fDT1rHJaCKwEUJkLMkYYTdTKgz1JkgAkMcDzOc">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
 tailwind.config = {
@@ -13,43 +14,69 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        "secondary-fixed": "#baf1a8", "outline": "#6f7b68",
-        "on-secondary": "#ffffff", "on-primary-fixed-variant": "#005301",
-        "on-background": "#171d15", "primary-fixed": "#8bfc75",
-        "inverse-on-surface": "#ecf3e4", "surface-variant": "#dee5d6",
-        "surface-tint": "#006e01", "surface-container-lowest": "#ffffff",
-        "inverse-surface": "#2c3229", "tertiary": "#8d4b51",
-        "tertiary-fixed": "#ffdadb", "tertiary-fixed-dim": "#ffb2b7",
-        "on-tertiary-fixed": "#3a0911", "surface-container-highest": "#dee5d6",
-        "primary-fixed-dim": "#6fdf5c", "on-error-container": "#93000a",
-        "surface-container-low": "#eff6e7", "on-surface-variant": "#3f4a3a",
-        "on-tertiary-container": "#7b3b42", "surface-container-high": "#e4eadc",
-        "on-secondary-container": "#406f35", "inverse-primary": "#6fdf5c",
-        "secondary": "#3a692f", "surface-container": "#e9f0e2",
-        "on-primary": "#ffffff", "on-primary-fixed": "#002200",
-        "secondary-container": "#baf1a8", "primary": "#006e01",
-        "on-surface": "#171d15", "error": "#ba1a1a",
-        "primary-container": "#69d957", "on-primary-container": "#005d01",
-        "on-tertiary-fixed-variant": "#71343a", "error-container": "#ffdad6",
-        "secondary-fixed-dim": "#9fd58e", "on-secondary-fixed": "#002200",
-        "surface-dim": "#d5dcce", "on-secondary-fixed-variant": "#22511a",
-        "tertiary-container": "#ffaab0", "background": "#f5fced",
-        "surface-bright": "#f5fced", "outline-variant": "#becab5",
-        "on-tertiary": "#ffffff", "on-error": "#ffffff", "surface": "#f5fced"
+        "inverse-surface": "#313030",
+        "secondary-fixed-dim": "#f7bd48",
+        "surface-container-highest": "#e5e2e1",
+        "secondary-fixed": "#ffdea6",
+        "surface-container-high": "#ebe7e7",
+        "on-tertiary-fixed": "#1a1c1a",
+        "surface-variant": "#e5e2e1",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#d4af37",
+        "tertiary-fixed-dim": "#c7c6c4",
+        "primary-fixed-dim": "#e9c349",
+        "tertiary-container": "#b3b3b0",
+        "inverse-on-surface": "#f3f0ef",
+        "primary": "#735c00",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface": "#fcf9f8",
+        "surface-container": "#f0edec",
+        "on-error-container": "#93000a",
+        "tertiary": "#5e5f5d",
+        "surface-bright": "#fcf9f8",
+        "on-secondary": "#ffffff",
+        "background": "#fcf9f8",
+        "primary-fixed": "#ffe088",
+        "secondary": "#7b5800",
+        "on-secondary-container": "#715000",
+        "on-secondary-fixed-variant": "#5d4200",
+        "on-background": "#1c1b1b",
+        "on-surface-variant": "#4d4635",
+        "surface-tint": "#735c00",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "tertiary-fixed": "#e3e2e0",
+        "outline-variant": "#d0c5af",
+        "surface-container-low": "#f6f3f2",
+        "on-tertiary-container": "#444543",
+        "outline": "#7f7663",
+        "on-surface": "#1c1b1b",
+        "on-primary-fixed": "#241a00",
+        "on-secondary-fixed": "#271900",
+        "on-primary-container": "#554300",
+        "error": "#ba1a1a",
+        "secondary-container": "#fdc34d",
+        "on-tertiary-fixed-variant": "#464745",
+        "inverse-primary": "#e9c349",
+        "on-primary-fixed-variant": "#574500",
+        "surface-dim": "#dcd9d9"
       },
-      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      borderRadius: {
+        DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"
+      },
       spacing: {
         base: "8px", lg: "48px", sm: "12px",
         "container-max": "1200px", md: "24px", xs: "4px",
         xl: "80px", gutter: "24px"
       },
       fontFamily: {
-        "headline-lg": ["Plus Jakarta Sans"],
-        "body-md": ["Be Vietnam Pro"],
-        "label-md": ["Be Vietnam Pro"],
-        "headline-md": ["Plus Jakarta Sans"],
-        "body-lg": ["Be Vietnam Pro"],
-        "headline-xl": ["Plus Jakarta Sans"]
+        "headline-lg": ["Playfair Display"],
+        "body-md": ["Inter"],
+        "label-md": ["Inter"],
+        "headline-md": ["Playfair Display"],
+        "body-lg": ["Inter"],
+        "headline-xl": ["Playfair Display"]
       },
       fontSize: {
         "headline-lg": ["32px", { lineHeight: "1.3", fontWeight: "700" }],
@@ -67,12 +94,16 @@ tailwind.config = {
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #fcf9f8; }
+  ::-webkit-scrollbar-thumb { background: #d0c5af; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #735c00; }
   /* Cart sidebar transition */
   #cartSidebar { transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
   #cartOverlay { transition: opacity 0.3s ease; }
   /* Product card hover */
   .product-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,110,1,0.13); }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(115,92,0,0.13); }
   .product-card .img-wrap img { transition: transform 0.5s ease; }
   .product-card:hover .img-wrap img { transform: scale(1.07); }
   /* Badge pulse */
@@ -81,9 +112,43 @@ tailwind.config = {
   /* Toast */
   #toast { transition: opacity 0.3s, transform 0.3s; }
   /* Range slider */
-  input[type=range] { accent-color: #006e01; }
+  input[type=range] { accent-color: #735c00; }
   /* Nav active */
-  .nav-active { color: #D97757; border-bottom: 2px solid #D97757; padding-bottom: 4px; font-weight: 700; }
+  .nav-active { color: #735c00; border-bottom: 2px solid #735c00; padding-bottom: 4px; font-weight: 700; }
+  /* Glass panel */
+  .glass-panel {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(208,197,175,0.5);
+    box-shadow: 0 8px 32px rgba(115,92,0,0.08), 0 2px 8px rgba(17,17,17,0.04);
+  }
+  /* Logo */
+  .logo-pulse { animation: logoPulse 3s ease-in-out infinite; }
+  @keyframes logoPulse { 0%,100%{box-shadow:0 0 0 0 rgba(115,92,0,0.15)} 50%{box-shadow:0 0 0 6px rgba(115,92,0,0)} }
+  .shimmer { position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.4) 50%,transparent 60%);background-size:200% 100%;animation:shimmer 2.5s infinite; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  /* Dropdown menus */
+  .service-dropdown, .store-dropdown {
+    display: none; position: absolute; top: calc(100% + 12px);
+    left: 50%; transform: translateX(-50%); min-width: 280px; z-index: 100;
+  }
+  .nav-service-item:hover .service-dropdown,
+  .nav-store-item:hover .store-dropdown { display: block; }
+  .service-dropdown::before, .store-dropdown::before {
+    content:''; position:absolute; top:-12px; left:0; right:0; height:12px;
+  }
+  /* Glassmorphism */
+  .glassmorphism { background:rgba(255,255,255,0.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  /* Ambient shadow */
+  .ambient-shadow { box-shadow: 0 8px 32px rgba(115,92,0,0.10), 0 2px 8px rgba(17,17,17,0.06); }
+  /* Mobile menu */
+  #mobile-menu { display:none; }
+  #mobile-menu.open { display:block; }
+  .mobile-submenu { display:none; }
+  .mobile-submenu.open { display:block; padding-bottom:8px; }
+  /* Avatar hidden */
+  .av-hidden { display: none !important; }
 </style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
@@ -96,109 +161,191 @@ tailwind.config = {
 </style>
 
 <!-- ═══ NAVBAR ═══ -->
-<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-emerald-100/40 shadow-sm shadow-emerald-900/5">
-  <div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-md border-b border-transparent transition-all duration-500" id="main-nav">
+  <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-24">
 
-    <!-- Logo -->
-    <div class="text-2xl font-bold text-emerald-900 italic" style="font-family:'Plus Jakarta Sans',sans-serif;">Paw &amp; Bloom</div>
+    <!-- Brand -->
+    <a class="group font-display-lg text-headline-md text-primary tracking-tight shrink-0 flex items-center" href="index.html">
+      <div class="flex items-center gap-3">
+        <div class="relative rounded-full overflow-hidden w-10 h-10 md:w-12 md:h-12 logo-pulse shadow-sm border border-primary/10">
+          <img alt="PET LUXURY Logo" class="logo-img h-full w-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjxsv1sDegtLpPWKi9JhyjFJYOzOM__72QTPViEhhpQ8tKfLEEMqZlKD_W_Tud0i4MaludNLc90WItlr0vndPUCTGvUxtq-9-TzE2ShYggMJyvzXtpHrBYJOV1w4utsbNxS6px-CPnwwnz8LEZnRCVthV8KybcO8AaD3lQDQ2BZ5Xjji2dZNoGPxC3hgy2Y7_g3rcSnbhybndO6wIii7o2WcMAyBaee6tSDSYg2fDT1rHJaCKwEUJkLMkYYTdTKgz1JkgAkMcDzOc">
+          <div class="shimmer"></div>
+        </div>
+        <span class="transition-colors duration-300 group-hover:text-secondary" style="font-family:'Playfair Display',serif;">PET LUXURY</span>
+      </div>
+    </a>
 
-    <!-- Nav links (desktop) -->
-    <div class="hidden md:flex space-x-1">
-<a href="index.html"
-class="text-stone-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all px-3 py-2 text-sm font-medium">
-Home
-</a>
-<a href="product_use.html"
-class="text-emerald-700 border-b-2 border-emerald-600 pb-1 font-medium tracking-tight px-3 py-2 text-sm">
-Shop
-</a>
-      <a href="services_use.html" class="text-stone-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all px-3 py-2 text-sm font-medium" style="font-family:'Plus Jakarta Sans',sans-serif;">Spa &amp; Grooming</a>
-      <a href="contact.html" class="text-stone-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all px-3 py-2 text-sm font-medium" style="font-family:'Plus Jakarta Sans',sans-serif;">Contact</a>
+    <!-- Nav Links Desktop -->
+    <div class="hidden md:flex space-x-6 items-center">
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="index.html">Trang Chủ</a>
+
+      <!-- DỊCH VỤ với submenu -->
+      <div class="relative nav-service-item">
+        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md flex items-center gap-1 cursor-pointer py-1" href="services_use.html">
+          Dịch Vụ <span class="material-symbols-outlined" style="font-size:16px;">expand_more</span>
+        </a>
+        <div class="service-dropdown">
+          <div class="glassmorphism rounded-xl overflow-hidden ambient-shadow py-2 border border-outline-variant/20">
+            <div class="px-4 py-2 border-b border-outline-variant/20">
+              <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Chăm Sóc & Làm Đẹp</span>
+            </div>
+            <a class="flex items-center gap-3 px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="services_use.html">
+              <span class="material-symbols-outlined text-primary" style="font-size:18px;">content_cut</span> Spa & Grooming
+            </a>
+            <a class="flex items-center gap-3 px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="services_use.html">
+              <span class="material-symbols-outlined text-primary" style="font-size:18px;">water_drop</span> Tắm & Sấy Lông
+            </a>
+            <a class="flex items-center gap-3 px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="services_use.html">
+              <span class="material-symbols-outlined text-primary" style="font-size:18px;">pets</span> Cắt Tỉa Lông
+            </a>
+            <div class="px-4 py-2 border-b border-t border-outline-variant/20 mt-1">
+              <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Y Tế & Sức Khoẻ</span>
+            </div>
+            <a class="flex items-center gap-3 px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="services_use.html">
+              <span class="material-symbols-outlined text-primary" style="font-size:18px;">stethoscope</span> Khám Thú Y
+            </a>
+            <a class="flex items-center gap-3 px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="services_use.html">
+              <span class="material-symbols-outlined text-primary" style="font-size:18px;">vaccines</span> Tiêm Phòng
+            </a>
+            <div class="px-4 pb-3 pt-2 border-t border-outline-variant/20">
+              <a href="services_use.html" class="flex items-center justify-center gap-1.5 bg-primary text-on-primary rounded-full px-4 py-2 font-label-md text-xs hover:bg-on-surface transition-colors">
+                <span class="material-symbols-outlined text-sm">calendar_add_on</span> Đặt Lịch Ngay
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CỬA HÀNG với submenu (active) -->
+      <div class="relative nav-store-item">
+        <a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md transition-all flex items-center gap-1 cursor-pointer" href="product_use.html">
+          Cửa Hàng <span class="material-symbols-outlined text-[16px]" style="font-size:16px;">expand_more</span>
+        </a>
+        <div class="store-dropdown">
+          <div class="glassmorphism rounded-xl overflow-hidden ambient-shadow py-2 border border-outline-variant/20">
+            <a class="block px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="product_use.html">Thức Ăn</a>
+            <a class="block px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="product_use.html">Vòng Cổ & Phụ Kiện</a>
+            <a class="block px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="product_use.html">Canxi & Thực Phẩm Chức Năng</a>
+            <a class="block px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="product_use.html">Dầu Tắm & Chăm Sóc</a>
+            <a class="block px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="product_use.html">Đồ Chơi</a>
+            <a class="block px-5 py-3 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md" href="product_use.html">Khác</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="order_use.html">Đơn Hàng</a>
+      
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="contact.html">Liên Hệ</a>
+
+      <!-- Dashboard (staff only) -->
+      <a id="nav-dashboard" class="hidden items-center gap-1 text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="dashboard.html">
+        <span class="material-symbols-outlined" style="font-size:16px;">storefront</span> Quản Lý
+      </a>
     </div>
 
-    <!-- Right side actions -->
-    <div class="flex items-center space-x-3">
-      <!-- Search -->
-      <button class="text-emerald-800 hover:bg-emerald-50 rounded-lg transition-all p-2 flex items-center justify-center">
-        <span class="material-symbols-outlined">search</span>
+    <!-- Right Actions -->
+    <div class="flex items-center space-x-3 shrink-0">
+      <button onclick="focusSearch()" class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">search</span>
+      </button>
+      <button onclick="toggleCart()" class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 relative">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">shopping_cart</span>
+        <span id="cartBadge" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
       </button>
 
-      <!-- Cart -->
-      <button onclick="toggleCart()" class="relative text-emerald-800 hover:bg-emerald-50 rounded-lg transition-all p-2 flex items-center justify-center">
-        <span class="material-symbols-outlined">shopping_cart</span>
-        <span id="cartBadge" class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
-      </button>
-
-      <!-- Login button (shown when NOT logged in) -->
+      <!-- Login button -->
       <a href="login.html" id="btn-login"
-         class="hidden items-center gap-1.5 bg-primary text-on-primary font-semibold text-sm px-4 py-2 rounded-full hover:scale-95 active:scale-90 transition-transform shadow-sm"
-         style="font-family:'Plus Jakarta Sans',sans-serif;">
-        <span class="material-symbols-outlined text-base" style="font-size:16px;">login</span>
-        Đăng nhập
+         class="hidden items-center gap-1.5 bg-primary text-on-primary font-label-md text-sm px-4 py-2 rounded-full hover:scale-95 active:scale-90 transition-transform shadow-sm"
+         style="font-family:Inter,sans-serif;">
+        <span class="material-symbols-outlined" style="font-size:16px;">login</span> Đăng nhập
       </a>
 
-      <!-- Avatar + Dropdown (shown when logged in) -->
+      <!-- Avatar + Dropdown -->
       <div class="relative" id="avatar-wrapper" style="display:none;">
-        <button id="avatar-btn"
-                class="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-emerald-50 border border-transparent hover:border-emerald-200 transition-all cursor-pointer group">
-          <!-- Avatar circle -->
-          <div id="avatar-circle"
-               class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all"
-               style="font-family:'Plus Jakarta Sans',sans-serif;">?</div>
-          <!-- Display name -->
-          <span id="avatar-name" class="text-sm font-semibold text-on-surface hidden sm:block" style="font-family:'Plus Jakarta Sans',sans-serif;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
-          <span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 text-base" id="avatar-chevron" style="font-size:18px;">expand_more</span>
+        <button id="avatar-btn" class="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-primary/10 border border-transparent hover:border-outline-variant transition-all cursor-pointer group">
+          <div id="avatar-circle" class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all">?</div>
+          <span id="avatar-name" class="text-sm font-semibold text-on-surface hidden sm:block" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+          <span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200" id="avatar-chevron" style="font-size:18px;">expand_more</span>
         </button>
-
-        <!-- Dropdown menu -->
-        <div id="avatar-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-[0_8px_32px_rgba(23,29,21,0.12)] border border-surface-variant overflow-hidden z-50">
-          <!-- User info header -->
-          <div class="px-4 py-3 bg-surface-container-low border-b border-surface-variant">
+        <div id="avatar-dropdown" class="av-hidden absolute right-0 mt-2 w-56 bg-surface rounded-xl shadow-[0_8px_32px_rgba(17,17,17,.12)] border border-outline-variant overflow-hidden z-50">
+          <div class="px-4 py-3 bg-surface-container-low border-b border-outline-variant">
             <p class="text-xs text-on-surface-variant font-medium">Đã đăng nhập với</p>
-            <p id="dropdown-username" class="text-sm font-bold text-on-surface truncate mt-0.5" style="font-family:'Plus Jakarta Sans',sans-serif;"></p>
+            <p id="dropdown-username" class="text-sm font-bold text-on-surface truncate mt-0.5"></p>
             <p id="dropdown-role" class="text-xs text-primary font-semibold mt-0.5"></p>
           </div>
-          <!-- Menu items -->
-          <div>
-            <!-- Dashboard link (only for staff roles) -->
-            <a href="dashboard.html" id="dropdown-dashboard"
-               class="hidden items-center gap-3 px-4 py-2.5 text-sm text-emerald-700 font-semibold hover:bg-emerald-50 transition-colors">
-              <span class="material-symbols-outlined text-emerald-600" style="font-size:18px;">storefront</span>
-              Quản lý cửa hàng
+          <div class="py-1">
+            <a href="dashboard.html" id="dropdown-dashboard" class="hidden items-center gap-3 px-4 py-2.5 text-sm text-secondary font-semibold hover:bg-primary/5 transition-colors">
+              <span class="material-symbols-outlined text-secondary" style="font-size:18px;">storefront</span> Quản lý cửa hàng
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-low transition-colors">
-              <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px;">settings</span>
-              Cài đặt
+            <a href="payments_use.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-low transition-colors">
+              <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px;">settings</span> Cài đặt
             </a>
           </div>
-          <div class="border-t border-surface-variant py-1">
-            <button id="btn-logout"
-                    class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-error hover:bg-error-container/30 transition-colors">
-              <span class="material-symbols-outlined text-error" style="font-size:18px;">logout</span>
-              Đăng xuất
+          <div class="border-t border-outline-variant py-1">
+            <button id="btn-logout" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-error hover:bg-error-container/30 transition-colors">
+              <span class="material-symbols-outlined text-error" style="font-size:18px;">logout</span> Đăng xuất
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button id="mobile-toggle" onclick="document.getElementById('mobile-menu').classList.toggle('open')" class="md:hidden text-primary hover:bg-primary/10 rounded-lg p-2">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden bg-surface border-t border-outline-variant/30 px-6">
+    <div class="py-4 space-y-1">
+      <a class="block text-on-surface-variant py-2 text-sm" href="index.html">Trang Chủ</a>
+
+      <!-- Dịch Vụ mobile -->
+      <div>
+        <button onclick="toggleMobileMenu('mobile-services')" class="w-full flex justify-between items-center text-on-surface-variant py-2 text-sm font-medium px-1">
+          Dịch Vụ <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+        <div id="mobile-services" class="mobile-submenu pl-4 space-y-1">
+          <a class="flex items-center gap-2 text-on-surface-variant py-1.5 text-sm" href="services_use.html"><span class="material-symbols-outlined text-primary" style="font-size:16px;">content_cut</span> Spa & Grooming</a>
+          <a class="flex items-center gap-2 text-on-surface-variant py-1.5 text-sm" href="services_use.html"><span class="material-symbols-outlined text-primary" style="font-size:16px;">water_drop</span> Tắm & Sấy Lông</a>
+          <a class="flex items-center gap-2 text-on-surface-variant py-1.5 text-sm" href="services_use.html"><span class="material-symbols-outlined text-primary" style="font-size:16px;">stethoscope</span> Khám Thú Y</a>
+          <a class="flex items-center gap-2 text-on-surface-variant py-1.5 text-sm" href="services_use.html"><span class="material-symbols-outlined text-primary" style="font-size:16px;">vaccines</span> Tiêm Phòng</a>
+          <a class="mt-2 inline-flex items-center gap-1.5 bg-primary text-on-primary rounded-full px-4 py-2 text-xs font-semibold" href="services_use.html">Đặt Lịch Ngay</a>
+        </div>
+      </div>
+
+      <!-- Cửa Hàng mobile -->
+      <div>
+        <button onclick="toggleMobileMenu('mobile-store')" class="w-full flex justify-between items-center text-primary font-semibold border-l-2 border-primary pl-3 py-2 text-sm">
+          Cửa Hàng <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+        <div id="mobile-store" class="mobile-submenu pl-4 space-y-1">
+          <a class="block text-on-surface-variant py-1.5 text-sm" href="product_use.html">Thức Ăn</a>
+          <a class="block text-on-surface-variant py-1.5 text-sm" href="product_use.html">Vòng Cổ & Phụ Kiện</a>
+          <a class="block text-on-surface-variant py-1.5 text-sm" href="product_use.html">Canxi & Thực Phẩm Chức Năng</a>
+          <a class="block text-on-surface-variant py-1.5 text-sm" href="product_use.html">Dầu Tắm & Chăm Sóc</a>
+          <a class="block text-on-surface-variant py-1.5 text-sm" href="product_use.html">Khác</a>
+        </div>
+      </div>
+
+      <a class="block text-on-surface-variant py-2 text-sm" href="order_use.html">Đơn Hàng</a>
+      
+      <a class="block text-on-surface-variant py-2 text-sm" href="contact.html">Liên Hệ</a>
+      <a id="mobile-dashboard" class="hidden items-center gap-2 text-secondary py-2 text-sm font-semibold" href="dashboard.html">
+        <span class="material-symbols-outlined" style="font-size:16px;">storefront</span> Quản lý cửa hàng
+      </a>
+      <div class="pt-2 pb-1">
+        <a href="login.html" id="btn-login-mobile" class="inline-flex items-center gap-1.5 bg-primary text-on-primary font-semibold text-sm px-5 py-2.5 rounded-full">
+          <span class="material-symbols-outlined" style="font-size:16px;">login</span> Đăng nhập
+        </a>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- ═══ MOBILE NAV ═══ -->
-<nav class="md:hidden bg-[#FDFBF7] fixed top-0 w-full z-50 border-b border-stone-100 shadow-sm">
-  <div class="flex justify-between items-center px-4 h-14">
-    <a class="text-xl font-extrabold text-[#D97757]" href="index.html">Paw &amp; Bloom</a>
-    <div class="flex items-center gap-3">
-      <button onclick="toggleCart()" class="relative text-stone-600">
-        <span class="material-symbols-outlined">shopping_basket</span>
-        <span id="cartBadgeMob" class="absolute -top-1.5 -right-1.5 bg-[#D97757] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
-      </button>
-    </div>
-  </div>
-</nav>
-
 <!-- ═══ MAIN CONTENT ═══ -->
-<main class="flex-grow pt-[88px] md:pt-[100px] pb-xl px-4 md:px-8 max-w-[1200px] mx-auto w-full flex gap-gutter">
+<main class="flex-grow pt-28 md:pt-32 pb-xl px-4 md:px-8 max-w-[1200px] mx-auto w-full flex gap-gutter">
 
   <!-- Sidebar Filters -->
   <aside class="w-64 hidden lg:block shrink-0">
@@ -287,14 +434,14 @@ Shop
 <footer class="bg-stone-50 w-full py-12 mt-20 border-t border-stone-200">
   <div class="max-w-[1200px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
     <div class="flex flex-col items-center md:items-start gap-2 text-center md:text-left">
-      <span class="text-xl font-bold text-stone-800">Paw &amp; Bloom</span>
-      <p class="font-['Plus_Jakarta_Sans'] text-sm text-[#D97757]">© 2024 Paw &amp; Bloom Pet Emporium. Chăm sóc thú cưng của bạn bằng tình yêu thương.</p>
+      <span class="text-xl font-bold text-stone-800" style="font-family:'Playfair Display',serif;">PET LUXURY</span>
+      <p class="text-sm text-primary">© 2024 PET LUXURY Pet Emporium. Chăm sóc thú cưng của bạn bằng tình yêu thương.</p>
     </div>
     <div class="flex flex-wrap justify-center gap-6">
-      <a class="font-['Plus_Jakarta_Sans'] text-sm text-stone-500 hover:text-[#D97757] underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Chính sách bảo mật</a>
-      <a class="font-['Plus_Jakarta_Sans'] text-sm text-stone-500 hover:text-[#D97757] underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Vận chuyển</a>
-      <a class="font-['Plus_Jakarta_Sans'] text-sm text-stone-500 hover:text-[#D97757] underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Đổi trả</a>
-      <a class="font-['Plus_Jakarta_Sans'] text-sm text-stone-500 hover:text-[#D97757] underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Điều khoản</a>
+      <a class="text-sm text-stone-500 hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="payments_use.html">Chính sách bảo mật</a>
+      <a class="text-sm text-stone-500 hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="payments_use.html">Vận chuyển</a>
+      <a class="text-sm text-stone-500 hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="payments_use.html">Đổi trả</a>
+      <a class="text-sm text-stone-500 hover:text-primary underline underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="payments_use.html">Điều khoản</a>
     </div>
   </div>
 </footer>
@@ -302,8 +449,8 @@ Shop
 <!-- ═══ CART SIDEBAR ═══ -->
 <div id="cartOverlay" onclick="toggleCart()" class="fixed inset-0 bg-black/30 z-[60] hidden opacity-0"></div>
 <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white z-[70] shadow-2xl translate-x-full flex flex-col">
-  <div class="flex items-center justify-between p-5 border-b border-stone-100">
-    <h2 class="text-lg font-bold text-stone-900 font-['Plus_Jakarta_Sans']">🛒 Giỏ hàng</h2>
+  <div class="flex items-center justify-between p-5 border-b border-outline-variant">
+    <h2 class="text-lg font-bold text-on-surface" style="font-family:'Playfair Display',serif;">🛒 Giỏ hàng</h2>
     <button onclick="toggleCart()" class="text-stone-400 hover:text-stone-700 transition-colors">
       <span class="material-symbols-outlined">close</span>
     </button>
@@ -311,10 +458,10 @@ Shop
   <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-4">
     <p class="text-stone-400 text-sm text-center mt-12">Giỏ hàng đang trống</p>
   </div>
-  <div class="p-5 border-t border-stone-100 bg-stone-50">
+  <div class="p-5 border-t border-outline-variant bg-surface-container-low">
     <div class="flex justify-between items-center mb-4">
-      <span class="text-stone-600 font-medium">Tổng cộng:</span>
-      <span id="cartTotal" class="text-xl font-bold text-primary font-['Plus_Jakarta_Sans']">0 ₫</span>
+      <span class="text-on-surface-variant font-medium">Tổng cộng:</span>
+      <span id="cartTotal" class="text-xl font-bold text-primary" style="font-family:'Playfair Display',serif;">0 ₫</span>
     </div>
     <button onclick="checkout()" class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md font-bold text-base active:scale-95 transition-transform hover:bg-surface-tint">
       Thanh toán ngay →
@@ -359,7 +506,7 @@ const STORAGE_KEY = 'petshop_products';
 
 const DEFAULT_PRODUCTS = [
   { id: 1,  categoryId: 1, productName: 'Royal Canin Adult Dog 10kg', price: 850000, stockQuantity: 50,  unit: 'túi',  description: 'Thức ăn cao cấp cho chó trưởng thành, công thức cân bằng dinh dưỡng tối ưu.', img: 'https://npet.com.vn/wp-content/uploads/2023/11/thuc-an-cho-cho-4.jpg' },
-  { id: 2,  categoryId: 1, productName: 'Pedigree Puppy 3kg',          price: 180000, stockQuantity: 80,  unit: 'túi',  description: 'Thức ăn dinh dưỡng cho chó con, giàu DHA hỗ trợ phát triển não bộ.',         img: 'https://fusiongroup.vn/upload/file/thumb_800x0/fusiongroupvn-thuc-an-hat-cho-cho-todays-dinner-co-tot-khong-2-1721974873.jpg' },
+  { id: 2,  categoryId: 1, productName: 'Pedigree Puppy 3kg',          price: 180000, stockQuantity: 80,  unit: 'túi',  description: 'Thức ăn dinh dưỡng cho chó con, giàu DHA hỗ trợ phát triển não bộ.',         img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJOUB9X1yuSY3w2Q6puFgy1gkihZKfc23MgA&s' },
   { id: 3,  categoryId: 2, productName: 'Whiskas Adult Cat 1.2kg',     price: 120000, stockQuantity: 60,  unit: 'túi',  description: 'Dinh dưỡng hoàn chỉnh cho mèo trưởng thành, hương vị cá hấp dẫn.',            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC8tGAXywsx1QkHoBaat_2HsRHwOj9jqWwLFWDp8auU6ifLsx1nD24ejOINxAz6IryUsicyWIEWXb5hihSuEJ3JjP75dOMO_FxZc9iopk9s6hKvjocbXmuRPL-kvBS8EiBqQ8tjTGEVQdvtCtu-VXcYDmAJWOgysbmvvtXAMZpwM6iCdVuVC0QRt_WTKS9vlTXsTG4otshSjMF39aLizwZPTqsq9l9ym0ved0aUzm85LHn1xhCsR69jTevokxL0rabBcRECr83zwXg' },
   { id: 4,  categoryId: 2, productName: 'Royal Canin Kitten 400g',     price:  95000, stockQuantity: 70,  unit: 'túi',  description: 'Dinh dưỡng đặc biệt cho mèo con đang phát triển, tăng cường miễn dịch.',       img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDd72hrYWYQmbhKzm5n2_WQk0b8Ei7mOCtsG8exninnousF-gGgSuKcaNoHYWqg3u1w6efz-MUTG18bNUEUJcUsdDlfuRTilaif7rvV3uK79YI2Gib_QCKUHFTWwuAPC4ehBbTfutU77W00CD6YfjRNc0CSmUkcuwmYNrOH2fngOgilHp0F5HnCcE3Yr59Yza2NTQp1d-0OE23gLpjN6zFYGGnNBdHPGp5mL03y5mjH8c3MoIvDAL8UFp1x28QUs851_ZWXe_kcv44' },
   { id: 5,  categoryId: 3, productName: 'Vòng cổ da',                  price:  95000, stockQuantity: 40,  unit: 'cái',  description: 'Vòng cổ da thật cao cấp, khóa kim loại chắc chắn, nhiều màu sắc thời trang.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNVbQjcIqhaCIxyiwg70zpIu2uNWHTahdNg&s' },
@@ -585,9 +732,11 @@ function renderProducts() {
                   </button>
                   <span class="text-sm font-bold text-primary w-5 text-center">${qty}</span>
                 ` : ''}
-                <button onclick="addToCart(${p.id})" class="bg-primary text-on-primary px-3 py-2 rounded-lg font-label-md text-sm active:scale-95 transition-transform flex items-center gap-1.5 hover:bg-surface-tint">
+                <button onclick="${p.stockQuantity > 0 ? `addToCart(${p.id})` : ''}" 
+                  class="${p.stockQuantity > 0 ? 'bg-primary text-on-primary hover:bg-surface-tint active:scale-95' : 'bg-stone-200 text-stone-400 cursor-not-allowed'} px-3 py-2 rounded-lg font-label-md text-sm transition-transform flex items-center gap-1.5"
+                  ${p.stockQuantity <= 0 ? 'disabled' : ''}>
                   <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
-                  ${qty === 0 ? 'Thêm' : '+1'}
+                  ${p.stockQuantity <= 0 ? 'Hết hàng' : (qty === 0 ? 'Thêm' : '+1')}
                 </button>
               </div>
             </div>
@@ -619,7 +768,18 @@ function renderPagination(total) {
 // ═══════════════════════════════════════════════
 
 function addToCart(productId) {
-  cart[productId] = (cart[productId] || 0) + 1;
+  const p = PRODUCTS.find(p => p.id === productId);
+  if (!p) return;
+
+  const inCart = cart[productId] || 0;
+  const available = p.stockQuantity || 0;
+
+  if (inCart >= available) {
+    showToast(`⚠️ Chỉ còn ${available} ${p.unit} trong kho!`);
+    return;
+  }
+
+  cart[productId] = inCart + 1;
   updateCartUI();
   showToast('Đã thêm vào giỏ hàng 🛒');
   renderProducts();
@@ -686,7 +846,9 @@ function renderCartItems() {
               <span class="material-symbols-outlined text-[14px]">remove</span>
             </button>
             <span class="text-sm font-bold text-primary">${qty}</span>
-            <button onclick="addToCart(${p.id})" class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-surface-tint transition-colors">
+            <button onclick="${qty < p.stockQuantity ? `addToCart(${p.id})` : ''}" 
+              class="w-6 h-6 rounded-full ${qty < p.stockQuantity ? 'bg-primary text-on-primary hover:bg-surface-tint' : 'bg-stone-200 text-stone-400 cursor-not-allowed'} flex items-center justify-center transition-colors"
+              ${qty >= p.stockQuantity ? 'disabled title="Đã đạt tối đa tồn kho"' : ''}>
               <span class="material-symbols-outlined text-[14px]">add</span>
             </button>
           </div>
@@ -710,6 +872,16 @@ function deleteCartItem(productId) {
 function checkout() {
   if (!getCartCount()) { showToast('Giỏ hàng trống!'); return; }
 
+  // Kiểm tra lại tồn kho trước khi thanh toán
+  for (const [id, qty] of Object.entries(cart)) {
+    const p = PRODUCTS.find(p => p.id === +id);
+    if (!p) continue;
+    if (qty > p.stockQuantity) {
+      showToast(`⚠️ "${p.productName}" chỉ còn ${p.stockQuantity} ${p.unit}!`);
+      return;
+    }
+  }
+
   const items = Object.entries(cart).map(([id, qty]) => {
     const p = PRODUCTS.find(p => p.id === +id);
     return p ? {
@@ -723,21 +895,51 @@ function checkout() {
     } : null;
   }).filter(Boolean);
 
-  const SHIPPING_FEE = 30000;
-  const userData = JSON.parse(localStorage.getItem('user') || '{}');
-  sessionStorage.setItem('payment_context', JSON.stringify({
-    type: 'product',
-    orderId: null,
-    customerId: userData.customerId || null,
-    customerName: userData.fullName || userData.username || '',
-    phone: userData.phone || '',
-    subtotal: getCartTotal(),
-    shippingFee: SHIPPING_FEE,
-    totalAmount: getCartTotal() + SHIPPING_FEE,
-    items,
-  }));
+  // Gọi API trừ tồn kho cho từng sản phẩm
+  const purchasePromises = items.map(item =>
+    fetch(`${API_BASE}/${item.productId}/purchase`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity: item.qty }),
+      signal: AbortSignal.timeout(5000)
+    })
+    .then(res => res.ok ? res.json() : null)
+    .then(updated => {
+      // Cập nhật stockQuantity local sau khi API thành công
+      if (updated) {
+        const idx = PRODUCTS.findIndex(p => p.id === item.productId);
+        if (idx !== -1) {
+          PRODUCTS[idx].stockQuantity = updated.stockQuantity;
+          if (updated.isActive === false) PRODUCTS[idx].isActive = false;
+        }
+      }
+    })
+    .catch(() => {
+      // Fallback: trừ tồn kho local nếu API chưa chạy
+      const idx = PRODUCTS.findIndex(p => p.id === item.productId);
+      if (idx !== -1) {
+        PRODUCTS[idx].stockQuantity = Math.max(0, (PRODUCTS[idx].stockQuantity || 0) - item.qty);
+        if (PRODUCTS[idx].stockQuantity === 0) PRODUCTS[idx].isActive = false;
+      }
+    })
+  );
 
-  window.location.href = 'payments_use.html';
+  Promise.allSettled(purchasePromises).then(() => {
+    const SHIPPING_FEE = 30000;
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    sessionStorage.setItem('payment_context', JSON.stringify({
+      type: 'product',
+      orderId: null,
+      customerId: userData.customerId || null,
+      customerName: userData.fullName || userData.username || '',
+      phone: userData.phone || '',
+      subtotal: getCartTotal(),
+      shippingFee: SHIPPING_FEE,
+      totalAmount: getCartTotal() + SHIPPING_FEE,
+      items,
+    }));
+    window.location.href = 'payments_use.html';
+  });
 }
 
 // ═══════════════════════════════════════════════
@@ -865,60 +1067,93 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Handle filterTable for mobile category dropdown (if added later)
 function filterTable() { renderProducts(); }
+
+// ─── MOBILE MENU TOGGLE ───
+function toggleMobileMenu(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+// ─── NAV SCROLL EFFECT ───
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('main-nav');
+  if (nav) {
+    if (window.scrollY > 30) {
+      nav.classList.add('bg-surface/95', 'border-outline-variant/30', 'shadow-sm');
+      nav.classList.remove('bg-surface/40', 'border-transparent');
+    } else {
+      nav.classList.remove('bg-surface/95', 'border-outline-variant/30', 'shadow-sm');
+      nav.classList.add('bg-surface/40', 'border-transparent');
+    }
+  }
+});
 </script>
 <!-- ═══ AUTH SCRIPT ═══ -->
 <script>
 const STAFF_ROLES_SHOP = ['Admin', 'Manager', 'Employee'];
+
 function renderNavShop() {
   const token = localStorage.getItem('token');
   const userData = JSON.parse(localStorage.getItem('user') || 'null');
   const btnLogin = document.getElementById('btn-login');
+  const btnLoginMob = document.getElementById('btn-login-mobile');
   const avatarWrapper = document.getElementById('avatar-wrapper');
   const avatarCircle = document.getElementById('avatar-circle');
   const avatarNameEl = document.getElementById('avatar-name');
   const dropdownUser = document.getElementById('dropdown-username');
   const dropdownRole = document.getElementById('dropdown-role');
   const dropDash = document.getElementById('dropdown-dashboard');
-  if (!btnLogin || !avatarWrapper || !avatarCircle || !avatarNameEl || !dropdownUser || !dropdownRole || !dropDash) return;
+  const navDash = document.getElementById('nav-dashboard');
+  const mobDash = document.getElementById('mobile-dashboard');
+
+  if (!btnLogin || !avatarWrapper) return;
+
   if (token && userData) {
     btnLogin.style.display = 'none';
+    if (btnLoginMob) btnLoginMob.style.display = 'none';
     avatarWrapper.style.display = 'flex'; avatarWrapper.style.alignItems = 'center';
     const displayName = userData.fullName || userData.username || userData.name || 'U';
-    avatarCircle.textContent = displayName.charAt(0).toUpperCase();
-    avatarNameEl.textContent = displayName.length > 16 ? displayName.slice(0,14)+'\u2026' : displayName;
-    dropdownUser.textContent = userData.username || userData.email || displayName;
-    dropdownRole.textContent = userData.role ? 'Vai trò: ' + userData.role : '';
+    if (avatarCircle) avatarCircle.textContent = displayName.charAt(0).toUpperCase();
+    if (avatarNameEl) avatarNameEl.textContent = displayName.length > 16 ? displayName.slice(0,14)+'\u2026' : displayName;
+    if (dropdownUser) dropdownUser.textContent = userData.username || userData.email || displayName;
+    if (dropdownRole) dropdownRole.textContent = userData.role ? 'Vai trò: ' + userData.role : '';
     const role = userData.role || '';
     if (STAFF_ROLES_SHOP.includes(role)) {
-      dropDash.classList.remove('hidden'); dropDash.style.display = 'flex';
+      if (dropDash) { dropDash.classList.remove('hidden'); dropDash.style.display = 'flex'; }
+      if (navDash) { navDash.classList.remove('hidden'); navDash.style.display = 'flex'; }
+      if (mobDash) { mobDash.classList.remove('hidden'); mobDash.style.display = 'flex'; }
     }
   } else {
     btnLogin.style.display = 'inline-flex';
+    if (btnLoginMob) btnLoginMob.style.display = 'inline-flex';
     avatarWrapper.style.display = 'none';
   }
 }
+
+// Avatar dropdown (services-style: av-hidden)
 const avatarBtnShop = document.getElementById('avatar-btn');
 const dropdownShopEl = document.getElementById('avatar-dropdown');
 const chevronShop = document.getElementById('avatar-chevron');
 let dropOpenShop = false;
+
 function openDropShop() {
   if (!dropdownShopEl) return;
   dropOpenShop = true;
-  dropdownShopEl.classList.remove('hidden');
+  dropdownShopEl.classList.remove('av-hidden');
   if (chevronShop) chevronShop.style.transform = 'rotate(180deg)';
 }
 function closeDropShop() {
   if (!dropdownShopEl) return;
   dropOpenShop = false;
-  dropdownShopEl.classList.add('hidden');
+  dropdownShopEl.classList.add('av-hidden');
   if (chevronShop) chevronShop.style.transform = 'rotate(0deg)';
 }
 if (avatarBtnShop) {
   avatarBtnShop.addEventListener('click', e => { e.stopPropagation(); dropOpenShop ? closeDropShop() : openDropShop(); });
 }
 document.addEventListener('click', e => {
-  const avatarWrapper = document.getElementById('avatar-wrapper');
-  if (avatarWrapper && !avatarWrapper.contains(e.target)) closeDropShop();
+  const aw = document.getElementById('avatar-wrapper');
+  if (aw && !aw.contains(e.target)) closeDropShop();
 });
 const logoutBtnShop = document.getElementById('btn-logout');
 if (logoutBtnShop) {
