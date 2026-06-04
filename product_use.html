@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Shop - Paw &amp; Bloom</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
- <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/aida-public/AB6AXuAjxsv1sDegtLpPWKi9JhyjFJYOzOM__72QTPViEhhpQ8tKfLEEMqZlKD_W_Tud0i4MaludNLc90WItlr0vndPUCTGvUxtq-9-TzE2ShYggMJyvzXtpHrBYJOV1w4utsbNxS6px-CPnwwnz8LEZnRCVthV8KybcO8AaD3lQDQ2BZ5Xjji2dZNoGPxC3hgy2Y7_g3rcSnbhybndO6wIii7o2WcMAyBaee6tSDSYg2fDT1rHJaCKwEUJkLMkYYTdTKgz1JkgAkMcDzOc">
+ <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -124,10 +124,13 @@ tailwind.config = {
     box-shadow: 0 8px 32px rgba(115,92,0,0.08), 0 2px 8px rgba(17,17,17,0.04);
   }
   /* Logo */
-  .logo-pulse { animation: logoPulse 3s ease-in-out infinite; }
+  .logo-pulse { animation: logoPulse 3s ease-in-out infinite; transition: all 0.3s ease; }
   @keyframes logoPulse { 0%,100%{box-shadow:0 0 0 0 rgba(115,92,0,0.15)} 50%{box-shadow:0 0 0 6px rgba(115,92,0,0)} }
   .shimmer { position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.4) 50%,transparent 60%);background-size:200% 100%;animation:shimmer 2.5s infinite; }
   @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  .logo-img { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .group:hover .logo-img { transform: scale(1.12) rotate(12deg); }
+  .group:hover .logo-pulse { border-color: #d4af37 !important; box-shadow: 0 0 15px rgba(212, 175, 55, 0.7) !important; transform: scale(1.05); }
   /* Dropdown menus */
   .service-dropdown, .store-dropdown {
     display: none; position: absolute; top: calc(100% + 12px);
@@ -168,7 +171,7 @@ tailwind.config = {
     <a class="group font-display-lg text-headline-md text-primary tracking-tight shrink-0 flex items-center" href="index.html">
       <div class="flex items-center gap-3">
         <div class="relative rounded-full overflow-hidden w-10 h-10 md:w-12 md:h-12 logo-pulse shadow-sm border border-primary/10">
-          <img alt="PET LUXURY Logo" class="logo-img h-full w-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjxsv1sDegtLpPWKi9JhyjFJYOzOM__72QTPViEhhpQ8tKfLEEMqZlKD_W_Tud0i4MaludNLc90WItlr0vndPUCTGvUxtq-9-TzE2ShYggMJyvzXtpHrBYJOV1w4utsbNxS6px-CPnwwnz8LEZnRCVthV8KybcO8AaD3lQDQ2BZ5Xjji2dZNoGPxC3hgy2Y7_g3rcSnbhybndO6wIii7o2WcMAyBaee6tSDSYg2fDT1rHJaCKwEUJkLMkYYTdTKgz1JkgAkMcDzOc">
+          <img alt="PET LUXURY Logo" class="logo-img h-full w-full object-cover rounded-full" src="favicon.png">
           <div class="shimmer"></div>
         </div>
         <span class="transition-colors duration-300 group-hover:text-secondary" style="font-family:'Playfair Display',serif;">PET LUXURY</span>

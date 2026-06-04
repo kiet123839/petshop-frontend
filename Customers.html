@@ -5,6 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Khách hàng - PetShop Admin</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+ <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script>
@@ -42,6 +43,7 @@
   
   /* Modal backdrop */
   .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+  .modal-backdrop.hidden{display:none !important}
   /* Toast */
   #toast{position:fixed;bottom:24px;right:24px;z-index:999;display:none}
   .toast-box{padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
@@ -70,7 +72,7 @@
     <p class="text-xs text-slate-500">Management Portal</p>
   </div>
   <a href="dashboard.html"  class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">dashboard</span>Tổng quan</a>
-  <a href="customers.html" class="nav-link active flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors"><span class="material-symbols-outlined text-[20px]">group</span>Khách hàng</a>
+  <a href="customers.html" class="nav-link active flex items-center gap-3 px-4 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold transition-colors"><span class="material-symbols-outlined text-[20px]">group</span>Khách hàng</a>
   <a href="pets.html"      class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">pets</span>Thú cưng</a>
   <a href="products.html"  class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">inventory_2</span>Sản phẩm</a>
   <a href="orders.html"    class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">shopping_cart</span>Đơn hàng</a>
@@ -498,11 +500,10 @@ async function createItem(payload){
 
 // ── UPDATE ITEM ──
 async function updateItem(id, payload){
-  // Backend chưa có PUT /customers/{id} theo code đã đọc → dùng POST tạo mới hoặc thông báo
-  // Nếu backend có PUT thì uncomment dòng dưới:
-  // const res = await fetch(`${API}/customers/${id}`, { method:'PUT', headers:H(), body:JSON.stringify(payload) });
-  toast('Backend hiện chưa hỗ trợ cập nhật khách hàng. Vui lòng liên hệ dev!','err');
-  throw new Error('not supported');
+  const res  = await fetch(`${API}/customers/${id}`, { method:'PUT', headers:H(), body:JSON.stringify(payload) });
+  const json = await res.json();
+  if(!res.ok) throw new Error(json.message||'Lỗi cập nhật khách hàng');
+  return json;
 }
 
 // ── DELETE ITEM ──
@@ -544,6 +545,7 @@ async function submitForm(){
   try {
     if(id){
       await updateItem(Number(id), payload);
+      toast('Cập nhật khách hàng thành công! ✅');
     } else {
       await createItem(payload);
       toast('Thêm khách hàng thành công! 🎉');
@@ -551,7 +553,7 @@ async function submitForm(){
     closeModal();
     await loadData();
   } catch(e){
-    if(!e.message.includes('not supported')) toast(e.message||'Có lỗi xảy ra!','err');
+    toast(e.message||'Có lỗi xảy ra!','err');
   } finally {
     btn.disabled=false;
     btn.innerHTML='<span class="material-symbols-outlined text-[18px]">save</span>Lưu';
