@@ -5,7 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Lịch làm việc - PetShop Admin</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
- <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -55,7 +54,6 @@
 </head>
 <body class="bg-background text-on-background antialiased flex">
 
-<!-- ───── SIDEBAR ───── -->
 <aside class="bg-white w-[240px] h-screen fixed left-0 top-0 border-r border-slate-200 flex flex-col p-4 gap-1 z-50 overflow-y-auto">
   <div class="mb-6 px-3 py-2">
     <h1 class="text-lg font-black tracking-tight text-primary">PetShop Admin</h1>
@@ -71,7 +69,7 @@
   <a href="payments.html"  class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">payments</span>Thanh toán</a>
   <div class="mt-2 border-t border-slate-100 pt-2">
     <a href="employees.html" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">badge</span>Nhân viên</a>
-    <a href="schedules.html" class="nav-link active flex items-center gap-3 px-4 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold transition-colors"><span class="material-symbols-outlined text-[20px]">schedule</span>Lịch làm việc</a>
+    <a href="schedules.html" class="nav-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"><span class="material-symbols-outlined text-[20px]">schedule</span>Lịch làm việc</a>
   </div>
   <div class="mt-auto pt-4 border-t border-slate-100">
     <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors text-left text-sm font-medium">
@@ -79,7 +77,6 @@
     </button>
   </div>
 </aside>
-<!-- ───── TOPBAR ───── -->
 <div class="ml-64 w-[calc(100%-16rem)] flex flex-col min-h-screen">
   <header class="bg-white/90 backdrop-blur-md fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 border-b border-slate-200 shadow-sm flex justify-between items-center px-8">
     <h2 class="text-xl font-bold text-on-surface">Lịch làm việc</h2>
@@ -91,10 +88,8 @@
     </div>
   </header>
 
-  <!-- ───── MAIN ───── -->
   <main class="flex-1 mt-16 p-6">
 
-    <!-- Tab toggle + Add button -->
     <div class="flex justify-between items-center mb-6">
       <div class="flex bg-surface-container-low p-1 rounded-lg border border-surface-container-high">
         <button id="btnCalendar" onclick="switchView('calendar')" class="px-4 py-2 bg-surface text-on-surface shadow-sm rounded-md text-xs font-semibold flex items-center gap-2">
@@ -104,12 +99,23 @@
           <span class="material-symbols-outlined text-sm">list</span> Danh sách
         </button>
       </div>
-      <button onclick="openModal()" class="bg-primary hover:bg-primary-dim text-on-primary px-4 py-2 rounded-lg text-xs font-semibold shadow-sm transition-colors flex items-center gap-2">
-        <span class="material-symbols-outlined text-sm">add</span> Thêm ca làm việc
-      </button>
-    </div>
 
-    <!-- ── CALENDAR VIEW ── -->
+      <div class="flex items-center gap-3">
+        <button id="btnDownloadTemplate" class="px-4 py-2 bg-surface text-on-surface border border-outline-variant hover:bg-surface-container rounded-lg text-xs font-semibold transition-colors flex items-center gap-2 shadow-sm">
+          <span class="material-symbols-outlined text-sm">download</span> Tải mẫu Excel
+        </button>
+
+        <button id="btnImportExcel" class="px-4 py-2 bg-[#e9ff6f]/30 text-green-800 hover:bg-[#e9ff6f]/50 border border-[#adc500]/50 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2 shadow-sm">
+          <span class="material-symbols-outlined text-sm">upload_file</span> Import Excel
+        </button>
+        <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="hidden" />
+
+        <button onclick="openModal()" class="bg-primary hover:bg-primary-dim text-on-primary px-4 py-2 rounded-lg text-xs font-semibold shadow-sm transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">add</span> Thêm ca làm việc
+        </button>
+      </div>
+      </div>
+
     <div id="calendarView" class="bg-surface rounded-xl border border-surface-container-high p-6 shadow-sm">
       <div class="flex justify-between items-center mb-6">
         <div class="flex items-center gap-4">
@@ -134,7 +140,6 @@
       </div>
     </div>
 
-    <!-- ── LIST VIEW ── -->
     <div id="listView" class="hidden">
       <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline/10 overflow-hidden">
         <div class="overflow-x-auto">
@@ -159,7 +164,6 @@
   </main>
 </div>
 
-<!-- ───── MODAL ───── -->
 <div id="modal" class="hidden fixed inset-0 bg-inverse-surface/50 backdrop-blur-sm z-50 flex items-center justify-center">
   <div class="bg-surface rounded-xl shadow-xl w-full max-w-md border border-surface-container-high overflow-hidden">
     <div class="p-6 border-b border-surface-container-high flex justify-between items-center">
@@ -202,7 +206,6 @@
   </div>
 </div>
 
-<!-- ───── TOAST ───── -->
 <div id="toast" class="fixed bottom-6 right-6 z-[100] hidden">
   <div id="toastInner" class="px-5 py-3 rounded-xl shadow-lg text-sm font-medium text-white flex items-center gap-2"></div>
 </div>
@@ -478,6 +481,114 @@ function showToast(msg, type = 'success') {
   inner.innerHTML = `<span class="material-symbols-outlined text-sm">${type === 'success' ? 'check_circle' : 'error'}</span>${msg}`;
   toast.classList.remove('hidden');
   setTimeout(() => toast.classList.add('hidden'), 3000);
+}
+
+
+// ==========================================
+// THÊM LOGIC XỬ LÝ IMPORT / EXPORT EXCEL
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btnDownload = document.getElementById('btnDownloadTemplate');
+  const btnImport = document.getElementById('btnImportExcel');
+  const fileInput = document.getElementById('excelFileInput');
+
+  if (btnDownload) btnDownload.addEventListener('click', downloadTemplate);
+  if (btnImport) btnImport.addEventListener('click', () => fileInput.click());
+  if (fileInput) fileInput.addEventListener('change', handleExcelUpload);
+});
+
+async function downloadTemplate() {
+  try {
+    showLoading(true);
+    const token = localStorage.getItem('token');
+    
+    // Tạo headers, thêm token nếu có (để khớp với Spring Security của BE)
+    const headers = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const response = await fetch(`${BASE}/schedules/template`, {
+      method: 'GET',
+      headers: headers
+    });
+    
+    if (!response.ok) throw new Error('Không thể tải file template từ hệ thống.');
+    
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Template_Import_Lich_Lam_Viec.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    showToast('Đã tải thành công file mẫu Excel!', 'success');
+  } catch (e) {
+    showToast('Lỗi: ' + e.message, 'error');
+  } finally {
+    showLoading(false);
+  }
+}
+
+async function handleExcelUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  e.target.value = ''; // Reset input để cho phép tải lên cùng 1 file nhiều lần
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  try {
+    showLoading(true);
+    const token = localStorage.getItem('token');
+    
+    const headers = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const response = await fetch(`${BASE}/schedules/import`, {
+      method: 'POST',
+      headers: headers,
+      body: formData
+    });
+    
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.message || 'Cấu trúc file không đúng hoặc gặp sự cố!');
+    }
+    
+    // Nếu thành công toàn bộ
+    if (result.success || (result.successCount > 0 && result.errors.length === 0)) {
+      showToast(`🎉 ${result.message}`, 'success');
+      await loadData();
+    } 
+    // Nếu thành công 1 phần, lỗi 1 phần (vd: Trùng ca)
+    else if (result.successCount > 0 && result.errors.length > 0) {
+      let errorMsg = `Import thành công ${result.successCount} dòng.\nCó ${result.errors.length} dòng lỗi không thể lưu:\n`;
+      result.errors.slice(0, 3).forEach(err => {
+        errorMsg += `- Dòng ${err.row}: ${err.error}\n`;
+      });
+      if (result.errors.length > 3) errorMsg += '... và các dòng khác.';
+      alert(errorMsg);
+      await loadData();
+    } 
+    // Nếu thất bại toàn bộ
+    else {
+      let errorMsg = result.message || 'Lỗi xử lý file Excel:\n';
+      if (result.errors && result.errors.length > 0) {
+        result.errors.slice(0, 4).forEach(err => {
+          errorMsg += `- Dòng ${err.row}: ${err.error}\n`;
+        });
+      }
+      alert(errorMsg);
+    }
+  } catch (e) {
+    showToast('Lỗi: ' + e.message, 'error');
+  } finally {
+    showLoading(false);
+  }
 }
 </script>
 </body>

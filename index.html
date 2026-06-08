@@ -91,6 +91,14 @@
   .store-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);opacity:0;visibility:hidden;transition:all .25s ease;pointer-events:none;z-index:60;min-width:200px}
   .nav-store-item:hover .store-dropdown{opacity:1;visibility:visible;pointer-events:auto}
 
+  /* Opaque dropdown menu background */
+  .service-dropdown .glassmorphism,
+  .store-dropdown .glassmorphism {
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   /* Avatar dropdown */
   #avatar-dropdown{transform-origin:top right;transition:opacity .15s ease,transform .15s ease}
   #avatar-dropdown.av-hidden{opacity:0;transform:scale(.95) translateY(-4px);pointer-events:none;display:block!important;visibility:hidden}
@@ -205,9 +213,10 @@
       <button class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">search</span>
       </button>
-      <button class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 relative">
+      <a href="product_use.html?openCart=true" class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 relative flex items-center justify-center">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">shopping_cart</span>
-      </button>
+        <span id="cartBadge" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+      </a>
       <button class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 hidden sm:block">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
       </button>
@@ -290,7 +299,7 @@
         </div>
       </div>
 
-      <a class="block text-on-surface-variant py-2 text-sm" href="order.html">Đơn Hàng</a>
+      <a class="block text-on-surface-variant py-2 text-sm" href="order_use.html">Đơn Hàng</a>
     
       <a class="block text-on-surface-variant py-2 text-sm" href="contact.html">Liên Hệ</a>
       <a id="mobile-dashboard" class="hidden items-center gap-2 text-secondary py-2 text-sm font-semibold" href="dashboard.html">
@@ -345,110 +354,10 @@
       </div>
       <a href="product_use.html" class="hidden md:flex items-center gap-1 text-primary font-label-md hover:text-secondary transition-colors">Xem tất cả <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Royal Canin Adult Dog 10kg" class="product-img w-full h-full object-cover" src="https://npet.com.vn/wp-content/uploads/2023/11/thuc-an-cho-cho-4.jpg">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Royal Canin Adult Dog 10kg</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Thức ăn cao cấp cho chó trưởng thành, công thức cân bằng dinh dưỡng tối ưu.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">850.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:80ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Pedigree Puppy 3kg" class="product-img w-full h-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJOUB9X1yuSY3w2Q6puFgy1gkihZKfc23MgA&s">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Pedigree Puppy 3kg</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Thức ăn dinh dưỡng cho chó con, giàu DHA hỗ trợ phát triển não bộ.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">180.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:160ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Whiskas Adult Cat 1.2kg" class="product-img w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8tGAXywsx1QkHoBaat_2HsRHwOj9jqWwLFWDp8auU6ifLsx1nD24ejOINxAz6IryUsicyWIEWXb5hihSuEJ3JjP75dOMO_FxZc9iopk9s6hKvjocbXmuRPL-kvBS8EiBqQ8tjTGEVQdvtCtu-VXcYDmAJWOgysbmvvtXAMZpwM6iCdVuVC0QRt_WTKS9vlTXsTG4otshSjMF39aLizwZPTqsq9l9ym0ved0aUzm85LHn1xhCsR69jTevokxL0rabBcRECr83zwXg">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Whiskas Adult Cat 1.2kg</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Dinh dưỡng hoàn chỉnh cho mèo trưởng thành, hương vị cá hấp dẫn.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">120.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:240ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Royal Canin Kitten 400g" class="product-img w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd72hrYWYQmbhKzm5n2_WQk0b8Ei7mOCtsG8exninnousF-gGgSuKcaNoHYWqg3u1w6efz-MUTG18bNUEUJcUsdDlfuRTilaif7rvV3uK79YI2Gib_QCKUHFTWwuAPC4ehBbTfutU77W00CD6YfjRNc0CSmUkcuwmYNrOH2fngOgilHp0F5HnCcE3Yr59Yza2NTQp1d-0OE23gLpjN6zFYGGnNBdHPGp5mL03y5mjH8c3MoIvDAL8UFp1x28QUs851_ZWXe_kcv44">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Royal Canin Kitten 400g</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Dinh dưỡng đặc biệt cho mèo con đang phát triển, tăng cường miễn dịch.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">95.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:320ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Vòng cổ da" class="product-img w-full h-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNVbQjcIqhaCIxyiwg70zpIu2uNWHTahdNg&s">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Vòng cổ da</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Vòng cổ da thật cao cấp, khóa kim loại chắc chắn, nhiều màu sắc thời trang.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">95.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:400ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Dây dắt tự thu 5m" class="product-img w-full h-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKojqFd-TqOCMk2kqsEyfdONMPecJFyK9aOQ&s">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Dây dắt tự thu 5m</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Dây dắt tự thu hiện đại dài 5m, thiết kế ergonomic thoải mái khi cầm nắm.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">185.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:480ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Dầu gội thú cưng 500ml" class="product-img w-full h-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnNDrxTO_0IYmwXvlQvA0dtkhzJdla2HRGSA&s">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Dầu gội thú cưng 500ml</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Dầu gội nhẹ nhàng, pH cân bằng cho da thú cưng. Hương thơm tự nhiên.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">125.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up" style="transition-delay:560ms">
-        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
-          <img alt="Lược chải lông" class="product-img w-full h-full object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTigj666i-xrV_Afly287GL36vCd9P0ZAWPKg&s">
-        </div>
-        <h3 class="font-headline-md text-on-surface mb-1 text-base">Lược chải lông</h3>
-        <p class="text-sm text-on-surface-variant mb-4">Lược chải lông chuyên nghiệp, tay cầm ergonomic, không gây đau cho thú cưng.</p>
-        <div class="flex justify-between items-center">
-          <span class="font-display-lg text-xl text-primary">75.000₫</span>
-          <button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-          </button>
-        </div>
+    <div id="featured-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12 text-on-surface-variant font-body-md">
+        <div class="inline-block w-6 h-6 border-2 border-outline-variant border-t-primary rounded-full animate-spin mb-2"></div>
+        <p class="text-sm">Đang tải sản phẩm đề xuất...</p>
       </div>
     </div>
     <div class="text-center mt-8 fade-up">
@@ -690,7 +599,188 @@ document.addEventListener('DOMContentLoaded', () => {
   if (statsSection) counterObs.observe(statsSection);
 
   renderNav();
+  updateNavbarCartBadge();
+  loadAndRenderFeaturedProducts();
 });
+
+const API_BASE = 'http://localhost:8080/api/products';
+const STORAGE_KEY = 'petshop_products';
+
+const DEFAULT_PRODUCTS = [
+  { id: 1,  categoryId: 1, productName: 'Royal Canin Adult Dog 10kg', price: 850000, stockQuantity: 50,  unit: 'túi',  description: 'Thức ăn cao cấp cho chó trưởng thành, công thức cân bằng dinh dưỡng tối ưu.', img: 'https://npet.com.vn/wp-content/uploads/2023/11/thuc-an-cho-cho-4.jpg' },
+  { id: 2,  categoryId: 1, productName: 'Pedigree Puppy 3kg',          price: 180000, stockQuantity: 80,  unit: 'túi',  description: 'Thức ăn dinh dưỡng cho chó con, giàu DHA hỗ trợ phát triển não bộ.',         img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJOUB9X1yuSY3w2Q6puFgy1gkihZKfc23MgA&s' },
+  { id: 3,  categoryId: 2, productName: 'Whiskas Adult Cat 1.2kg',     price: 120000, stockQuantity: 60,  unit: 'túi',  description: 'Dinh dưỡng hoàn chỉnh cho mèo trưởng thành, hương vị cá hấp dẫn.',            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC8tGAXywsx1QkHoBaat_2HsRHwOj9jqWwLFWDp8auU6ifLsx1nD24ejOINxAz6IryUsicyWIEWXb5hihSuEJ3JjP75dOMO_FxZc9iopk9s6hKvjocbXmuRPL-kvBS8EiBqQ8tjTGEVQdvtCtu-VXcYDmAJWOgysbmvvtXAMZpwM6iCdVuVC0QRt_WTKS9vlTXsTG4otshSjMF39aLizwZPTqsq9l9ym0ved0aUzm85LHn1xhCsR69jTevokxL0rabBcRECr83zwXg' },
+  { id: 4,  categoryId: 2, productName: 'Royal Canin Kitten 400g',     price:  95000, stockQuantity: 70,  unit: 'túi',  description: 'Dinh dưỡng đặc biệt cho mèo con đang phát triển, tăng cường miễn dịch.',       img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDd72hrYWYQmbhKzm5n2_WQk0b8Ei7mOCtsG8exninnousF-gGgSuKcaNoHYWqg3u1w6efz-MUTG18bNUEUJcUsdDlfuRTilaif7rvV3uK79YI2Gib_QCKUHFTWwuAPC4ehBbTfutU77W00CD6YfjRNc0CSmUkcuwmYNrOH2fngOgilHp0F5HnCcE3Yr59Yza2NTQp1d-0OE23gLpjN6zFYGGnNBdHPGp5mL03y5mjH8c3MoIvDAL8UFp1x28QUs851_ZWXe_kcv44' },
+  { id: 5,  categoryId: 3, productName: 'Vòng cổ da',                  price:  95000, stockQuantity: 40,  unit: 'cái',  description: 'Vòng cổ da thật cao cấp, khóa kim loại chắc chắn, nhiều màu sắc thời trang.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNVbQjcIqhaCIxyiwg70zpIu2uNWHTahdNg&s' },
+  { id: 6,  categoryId: 3, productName: 'Dây dắt tự thu 5m',          price: 185000, stockQuantity: 30,  unit: 'cái',  description: 'Dây dắt tự thu hiện đại dài 5m, thiết kế ergonomic thoải mái khi cầm nắm.',  img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKojqFd-TqOCMk2kqsEyfdONMPecJFyK9aOQ&s' },
+  { id: 7,  categoryId: 4, productName: 'Dầu gội thú cưng 500ml',     price: 125000, stockQuantity: 100, unit: 'chai', description: 'Dầu gội nhẹ nhàng, pH cân bằng cho da thú cưng. Hương thơm tự nhiên.',         img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnNDrxTO_0IYmwXvlQvA0dtkhzJdla2HRGSA&s' },
+  { id: 8,  categoryId: 4, productName: 'Lược chải lông',              price:  75000, stockQuantity: 45,  unit: 'cái',  description: 'Lược chải lông chuyên nghiệp, tay cầm ergonomic, không gây đau cho thú cưng.',  img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTigj666i-xrV_Afly287GL36vCd9P0ZAWPKg&s' },
+  { id: 9,  categoryId: 5, productName: 'Dầu cá Omega-3 60 viên',     price: 220000, stockQuantity: 35,  unit: 'chai', description: 'Viên dầu cá Omega-3 cho thú cưng, giúp lông bóng mượt và tăng cường sức đề kháng.', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBity2wZZMq69kipbb2oKed2TV9nEJSRCNDP1RSabIlWv5cebZMnuYAd4ZdZvsrooGJjSNewwQBkdaalI9hW49-iycTjxr4HxhMftyRKUv3_-m__6k6r6tnEZFMsMybvtVbzQsR8yvCYWKTIWm0r14fSQZ1bb8trXvIDoDNzR5sp-UiJG5RyfkGC91bSnvLCujqEeiWxUyCtTJnNrMC_bbOL6Z8G6kdKhBkz2culnxLiaw4-VyuNukwRjc_Y6AY4HoD5F5BJJOOOkk' },
+  { id: 10, categoryId: 5, productName: 'Vitamin C 100 viên',          price:  85000, stockQuantity: 55,  unit: 'chai', description: 'Vitamin C tổng hợp cho thú cưng, tăng sức đề kháng và hỗ trợ hệ miễn dịch.',   img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEqlqFDs_lN1YWKewSvykI_S68yjPSHkN2rQ&s' },
+];
+
+const DEFAULT_PRODUCT_IMAGES = DEFAULT_PRODUCTS.reduce((images, product) => {
+  images.byId[product.id] = product.img;
+  images.byName[product.productName.toLowerCase()] = product.img;
+  return images;
+}, { byId: {}, byName: {} });
+
+function normalizeImageUrl(url) {
+  if (!url) return '';
+  const value = String(url).trim();
+  return value.startsWith('/') ? `http://localhost:8080${value}` : value;
+}
+
+function getDefaultProductImage(product) {
+  const id = Number(product.id);
+  const name = String(product.productName || '').toLowerCase();
+  return DEFAULT_PRODUCT_IMAGES.byId[id] || DEFAULT_PRODUCT_IMAGES.byName[name] || '';
+}
+
+function normalizeProduct(product) {
+  const img = normalizeImageUrl(product.img || product.imageUrl || getDefaultProductImage(product));
+  return {
+    ...product,
+    id: Number(product.id),
+    categoryId: Number(product.categoryId),
+    price: Number(product.price) || 0,
+    stockQuantity: Number(product.stockQuantity) || 0,
+    unit: product.unit || 'cái',
+    description: product.description || '',
+    img,
+    imageUrl: img,
+    isActive: product.isActive !== false,
+  };
+}
+
+function getLocalProducts() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) return parsed.map(normalizeProduct).filter(p => p.isActive !== false);
+    }
+  } catch (e) {}
+  return DEFAULT_PRODUCTS.map(normalizeProduct);
+}
+
+function saveProducts(products) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+}
+
+function getProductTime(product) {
+  return Date.parse(product.updatedAt || product.createdAt || '') || 0;
+}
+
+function mergeProducts(apiProducts, localProducts) {
+  const byId = new Map();
+  [...apiProducts, ...localProducts].map(normalizeProduct).forEach(product => {
+    const current = byId.get(product.id);
+    if (!current || getProductTime(product) > getProductTime(current)) {
+      byId.set(product.id, product);
+    }
+  });
+  return [...byId.values()].filter(p => p.isActive !== false);
+}
+
+async function loadProducts() {
+  const localProducts = getLocalProducts();
+  let productsList = localProducts;
+
+  try {
+    const res = await fetch(`${API_BASE}?active=true`, {
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!res.ok) throw new Error('API error');
+
+    const data = await res.json();
+    if (Array.isArray(data) && data.length) {
+      productsList = mergeProducts(data, localProducts);
+      saveProducts(productsList);
+    }
+  } catch (e) {
+    // Backend chua chay thi dung du lieu admin da luu trong localStorage.
+  }
+  return productsList;
+}
+
+function fmtPrice(p) {
+  return p.toLocaleString('vi-VN') + '₫';
+}
+
+async function loadAndRenderFeaturedProducts() {
+  const grid = document.getElementById('featured-products-grid');
+  if (!grid) return;
+
+  const allProducts = await loadProducts();
+  // Lọc sản phẩm còn hàng (stockQuantity > 0)
+  const inStockProducts = allProducts.filter(p => p.stockQuantity > 0);
+
+  if (!inStockProducts.length) {
+    grid.innerHTML = `<div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12 text-on-surface-variant font-body-md">Hiện tại chưa có sản phẩm nào nổi bật hoặc tất cả sản phẩm đều đã hết hàng.</div>`;
+    return;
+  }
+
+  // Lấy tối đa 8 sản phẩm nổi bật đầu tiên
+  const featured = inStockProducts.slice(0, 8);
+
+  grid.innerHTML = featured.map((p, idx) => {
+    const delay = idx * 80;
+    return `
+      <div class="product-card glassmorphism rounded-2xl p-5 ambient-shadow border border-outline-variant/30 fade-up animate-fade-in" style="transition-delay:${delay}ms">
+        <div class="aspect-square bg-surface-container-low rounded-xl mb-4 overflow-hidden">
+          <img alt="${p.productName}" class="product-img w-full h-full object-cover" src="${p.img}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect fill=%22%23e9f0e2%22 width=%22200%22 height=%22200%22/><text y=%22110%22 x=%22100%22 text-anchor=%22middle%22 font-size=%2240%22>🐾</text></svg>'">
+        </div>
+        <h3 class="font-headline-md text-on-surface mb-1 text-base truncate" title="${p.productName}">${p.productName}</h3>
+        <p class="text-sm text-on-surface-variant mb-4 line-clamp-2 h-10">${p.description || 'Chưa có mô tả cho sản phẩm này.'}</p>
+        <div class="flex justify-between items-center">
+          <span class="font-display-lg text-xl text-primary font-bold">${fmtPrice(p.price)}</span>
+          <button onclick="addHomeProductToCart(${p.id})" class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Kích hoạt lại Fade-up animation cho các phần tử mới được thêm
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); o.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  grid.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+}
+
+function addHomeProductToCart(productId) {
+  try {
+    let cart = {};
+    const savedCart = localStorage.getItem('petshop_cart');
+    if (savedCart) cart = JSON.parse(savedCart);
+    cart[productId] = (cart[productId] || 0) + 1;
+    localStorage.setItem('petshop_cart', JSON.stringify(cart));
+    window.location.href = 'product_use.html?openCart=true';
+  } catch(e) {
+    window.location.href = 'product_use.html';
+  }
+}
+
+function updateNavbarCartBadge() {
+  try {
+    const savedCart = localStorage.getItem('petshop_cart');
+    if (savedCart) {
+      const cart = JSON.parse(savedCart);
+      const count = Object.values(cart).reduce((a, b) => a + b, 0);
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count;
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    }
+  } catch(e) {}
+}
 </script>
 </body>
 </html>

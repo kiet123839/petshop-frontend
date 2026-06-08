@@ -430,6 +430,7 @@ async function completePayment() {
     saveCompletedPayment(record);
     localStorage.setItem('dashboard_needs_refresh', Date.now().toString());
     sessionStorage.removeItem('payment_context');
+    localStorage.removeItem('petshop_cart');
 
     document.getElementById('successText').textContent = `Đơn #${finalOrderId} đã được ghi nhận với số tiền ${fmtVND(finalAmount)}.`;
     document.getElementById('successBox').classList.remove('hidden');
@@ -470,6 +471,7 @@ function handleVnPayReturnParams() {
       };
       saveCompletedPayment(record);
       sessionStorage.removeItem('payment_context');
+      localStorage.removeItem('petshop_cart');
     }
     localStorage.setItem('dashboard_needs_refresh', Date.now().toString());
     document.getElementById('successText').textContent = `Đơn #${orderId} đã thanh toán VNPay thành công.`;

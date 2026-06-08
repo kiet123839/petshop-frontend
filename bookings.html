@@ -232,9 +232,9 @@
         <!-- Dịch vụ -->
         <div>
           <label class="block font-label-md text-on-surface-variant mb-1">Dịch vụ *</label>
-          <select id="fServiceId" class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm focus:ring-2 focus:ring-primary focus:outline-none">
-            <option value="">-- Chọn dịch vụ --</option>
-          </select>
+          <div id="fServicesContainer" class="w-full border border-outline-variant rounded-lg p-3 max-h-48 overflow-y-auto space-y-2 bg-surface text-sm">
+            <!-- Checkboxes populated via JS -->
+          </div>
         </div>
         <!-- Ngày -->
         <div>
@@ -332,11 +332,11 @@ function formatLocalDateISO(date) {
 }
 
 function fmtTime(b) {
-  const time = b.bookingTime || '';
+  const time = b.bookingTime ? b.bookingTime.slice(0, 5) : '';
   const date = b.bookingDate || '';
   if (!date) return '—';
   const d = new Date(date);
-  return `<p class="font-medium">${time || ''}</p><p class="text-xs text-on-surface-variant">${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}</p>`;
+  return `<p class="font-medium">${time}</p><p class="text-xs text-on-surface-variant">${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}</p>`;
 }
 
 function statusBadge(s) {
@@ -404,11 +404,16 @@ async function loadServices() {
     const r = await fetch(`${API}/services?active=true`);
     const data = await r.json();
     const list = Array.isArray(data) ? data : (data.data || []);
-    const sel = document.getElementById('fServiceId');
-    sel.innerHTML = '<option value="">-- Chọn dịch vụ --</option>';
-    list.forEach(s => {
-      sel.innerHTML += `<option value="${s.id}">${s.serviceName} – ${Number(s.price).toLocaleString('vi-VN')}₫</option>`;
-    });
+    services = list;
+    const container = document.getElementById('fServicesContainer');
+    if (container) {
+      container.innerHTML = list.map(s => `
+        <label class="flex items-center gap-2 cursor-pointer hover:bg-surface-container-low p-1 rounded transition-colors select-none">
+          <input type="checkbox" name="fServiceIds" value="${s.id}" class="text-primary h-4 w-4 rounded border-outline-variant focus:ring-primary"/>
+          <span>${s.serviceName} - <strong class="text-primary">${Number(s.price).toLocaleString('vi-VN')}đ</strong></span>
+        </label>
+      `).join('');
+    }
   } catch(e) {}
 }
 
@@ -436,6 +441,44 @@ async function onCustomerChange() {
 }
 
 // ─── FILTER & RENDER ───
+function groupBookings(list) {
+  const grouped = [];
+  const map = {};
+
+  list.forEach(b => {
+    const datePart = b.bookingDate ? b.bookingDate.substring(0, 10) : '';
+    const key = `${b.customerId}_${b.petId}_${datePart}_${b.bookingTime}_${b.status}`;
+
+    if (!map[key]) {
+      map[key] = {
+        ...b,
+        groupedBookings: [b],
+        serviceNames: [b.serviceName].filter(Boolean),
+        totalPriceGrouped: b.totalPrice || 0
+      };
+      grouped.push(map[key]);
+    } else {
+      map[key].groupedBookings.push(b);
+      if (b.serviceName && !map[key].serviceNames.includes(b.serviceName)) {
+        map[key].serviceNames.push(b.serviceName);
+      }
+      map[key].totalPriceGrouped += (b.totalPrice || 0);
+      if (b.notes && map[key].notes && !map[key].notes.includes(b.notes)) {
+        map[key].notes += ' | ' + b.notes;
+      } else if (b.notes && !map[key].notes) {
+        map[key].notes = b.notes;
+      }
+    }
+  });
+
+  grouped.forEach(g => {
+    g.serviceName = g.serviceNames.join(', ');
+    g.totalPrice = g.totalPriceGrouped;
+  });
+
+  return grouped;
+}
+
 function applyFilters() {
   const dateVal  = document.getElementById('filterDate').value;
   const empVal   = document.getElementById('filterEmployee').value;
@@ -453,10 +496,11 @@ function applyFilters() {
     return matchDate && matchEmp && matchStat && matchSrch;
   });
 
-  renderTable(filtered);
+  const grouped = groupBookings(filtered);
+  renderTable(grouped);
 
   const badge = document.getElementById('countBadge');
-  badge.textContent = filtered.length + ' kết quả';
+  badge.textContent = grouped.length + ' kết quả';
   badge.classList.remove('hidden');
 }
 
@@ -470,7 +514,7 @@ function renderTable(list) {
   if (!list.length) {
     tbody.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-on-surface-variant text-sm">
       <span class="material-symbols-outlined text-3xl block mb-2 opacity-40">calendar_today</span>
-      Không có lịch hẹn nào</td></tr>`;
+      Khách không có lịch hẹn nào</td></tr>`;
     return;
   }
   tbody.innerHTML = list.map(b => `
@@ -482,12 +526,12 @@ function renderTable(list) {
             <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">pets</span>
           </div>
           <div>
-            <p class="font-medium text-on-surface">${b.customerName || '—'}</p>
-            <p class="text-xs text-on-surface-variant">${b.petSpecies || ''} (${b.petName || '—'})</p>
+            <p class="font-medium text-on-surface">${b.customerName || '-'}</p>
+            <p class="text-xs text-on-surface-variant">${b.petSpecies || ''} (${b.petName || '-'})</p>
           </div>
         </div>
       </td>
-      <td class="p-4">${b.serviceName || '—'}</td>
+      <td class="p-4">${b.serviceName || '-'}</td>
       <td class="p-4">${fmtTime(b)}</td>
       <td class="p-4">${statusBadge(b.status)}</td>
       <td class="p-4 text-right opacity-0 group-hover:opacity-100 transition-opacity">
@@ -511,9 +555,7 @@ function buildTodayTimeline() {
   const now = new Date();
   const today = formatLocalDateISO(now);
 
-  // Format ngày cho label
   const dd = now.getDate().toString().padStart(2,'0');
-  const mm = (now.getMonth()+1).toString().padStart(2,'0');
   document.getElementById('todayDateLabel').textContent = `${dd} Tháng ${now.getMonth()+1}`;
 
   const todayBookings = allBookings
@@ -521,8 +563,9 @@ function buildTodayTimeline() {
     .sort((a,b) => (a.bookingTime||'').localeCompare(b.bookingTime||''));
 
   const timeline = document.getElementById('todayTimeline');
+  const groupedToday = groupBookings(todayBookings);
 
-  if (!todayBookings.length) {
+  if (!groupedToday.length) {
     timeline.innerHTML = `<div class="pl-6 py-3 text-xs text-on-surface-variant italic">Không có lịch hẹn hôm nay.</div>`;
     document.getElementById('emptyStateTitle').textContent = 'Chưa có lịch hẹn hôm nay';
     return;
@@ -530,14 +573,15 @@ function buildTodayTimeline() {
 
   const dotColor = { Confirmed:'bg-secondary', InProgress:'bg-tertiary', Completed:'bg-primary', Pending:'bg-surface-variant', Cancelled:'bg-error', NoShow:'bg-on-surface-variant' };
 
-  timeline.innerHTML = todayBookings.slice(0,5).map(b => {
+  timeline.innerHTML = groupedToday.slice(0,5).map(b => {
     const dot = dotColor[b.status] || 'bg-surface-variant';
+    const timeFormatted = b.bookingTime ? b.bookingTime.slice(0, 5) : '';
     const endTime = b.bookingTime && b.durationMinutes
-      ? calcEndTime(b.bookingTime, b.durationMinutes)
+      ? calcEndTime(timeFormatted, b.durationMinutes)
       : '';
     return `<div class="relative pl-6">
       <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full ${dot} border-2 border-white"></span>
-      <p class="text-xs font-label-md text-secondary">${b.bookingTime || ''}${endTime ? ' - ' + endTime : ''}</p>
+      <p class="text-xs font-label-md text-secondary">${timeFormatted}${endTime ? ' - ' + endTime : ''}</p>
       <div class="bg-white p-3 rounded-lg border border-outline-variant mt-1 shadow-sm">
         <p class="text-sm font-medium text-on-surface">${b.serviceName || ''} – ${b.petName || ''}</p>
         <p class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
@@ -557,17 +601,21 @@ function calcEndTime(timeStr, minutes) {
 
 // ─── MODAL TẠO / SỬA ───
 async function openCreate() {
-  document.getElementById('modalTitle').textContent = 'Tạo Lịch hẹn Mới';
+  document.getElementById('modalTitle').textContent = 'Tạo Lịch Hẹn Mới';
   document.getElementById('editId').value = '';
   document.getElementById('fCustomerId').value = '';
   document.getElementById('fPetId').innerHTML = '<option value="">-- Chọn thú cưng --</option>';
-  document.getElementById('fServiceId').value = '';
   document.getElementById('fDate').value = '';
   document.getElementById('fTime').value = '';
   document.getElementById('fEmployeeId').value = '';
   document.getElementById('fNotes').value = '';
   await loadCustomers();
   await loadServices();
+  
+  // Bỏ tích tất cả checkbox dịch vụ
+  const checkboxes = document.querySelectorAll('input[name="fServiceIds"]');
+  checkboxes.forEach(cb => cb.checked = false);
+
   loadEmployeesInModal();
   showModal('bookingModal');
 }
@@ -583,20 +631,42 @@ async function openEdit(id) {
   document.getElementById('fCustomerId').value = b.customerId || '';
   await onCustomerChange();
   document.getElementById('fPetId').value = b.petId || '';
-  document.getElementById('fServiceId').value = b.serviceId || '';
-  document.getElementById('fDate').value = b.bookingDate || '';
+  document.getElementById('fDate').value = b.bookingDate ? b.bookingDate.substring(0, 10) : '';
   document.getElementById('fTime').value = b.bookingTime || '';
   document.getElementById('fEmployeeId').value = b.employeeId || '';
   document.getElementById('fNotes').value = b.notes || '';
+
+  // Tìm các dịch vụ cùng nhóm để tích chọn checkbox tương ứng
+  const datePart = b.bookingDate ? b.bookingDate.substring(0, 10) : '';
+  const sameGroup = allBookings.filter(x => 
+    x.customerId === b.customerId && 
+    x.petId === b.petId && 
+    (x.bookingDate ? x.bookingDate.substring(0, 10) : '') === datePart && 
+    x.bookingTime === b.bookingTime
+  );
+  const selectedServiceIds = sameGroup.map(x => x.serviceId);
+
+  const checkboxes = document.querySelectorAll('input[name="fServiceIds"]');
+  checkboxes.forEach(cb => {
+    cb.checked = selectedServiceIds.includes(Number(cb.value));
+  });
+
   showModal('bookingModal');
 }
 
 async function saveBooking() {
   const id = document.getElementById('editId').value;
+  
+  // Thu thập ID dịch vụ được chọn
+  const checkedBoxes = document.querySelectorAll('input[name="fServiceIds"]:checked');
+  const serviceIds = Array.from(checkedBoxes).map(cb => Number(cb.value));
+
+  if (!serviceIds.length) { showToast('Vui lòng chọn ít nhất 1 dịch vụ', false); return; }
+
   const body = {
     customerId: Number(document.getElementById('fCustomerId').value) || null,
     petId:      Number(document.getElementById('fPetId').value) || null,
-    serviceId:  Number(document.getElementById('fServiceId').value) || null,
+    serviceIds: serviceIds,
     bookingDate: document.getElementById('fDate').value || null,
     bookingTime: document.getElementById('fTime').value || null,
     employeeId:  Number(document.getElementById('fEmployeeId').value) || null,
@@ -605,7 +675,6 @@ async function saveBooking() {
 
   if (!body.customerId) { showToast('Vui lòng chọn khách hàng', false); return; }
   if (!body.petId)      { showToast('Vui lòng chọn thú cưng', false); return; }
-  if (!body.serviceId)  { showToast('Vui lòng chọn dịch vụ', false); return; }
   if (!body.bookingDate){ showToast('Vui lòng chọn ngày', false); return; }
   if (!body.bookingTime){ showToast('Vui lòng chọn giờ', false); return; }
 
@@ -659,15 +728,30 @@ async function updateStatus() {
   const body   = { status };
   if (status === 'Cancelled' && reason) body.reason = reason;
 
+  const b = allBookings.find(x => x.id === Number(id));
+  if (!b) return;
+
+  const datePart = b.bookingDate ? b.bookingDate.substring(0, 10) : '';
+  const sameGroup = allBookings.filter(x => 
+    x.customerId === b.customerId && 
+    x.petId === b.petId && 
+    (x.bookingDate ? x.bookingDate.substring(0, 10) : '') === datePart && 
+    x.bookingTime === b.bookingTime
+  );
+  const ids = sameGroup.map(x => x.id);
+
   try {
-    const r = await fetch(`${API}/bookings/${id}/status`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    const data = await r.json();
-    if (!r.ok) {
-      showToast(data.message || 'Lỗi cập nhật', false);
+    const promises = ids.map(bookingId => 
+      fetch(`${API}/bookings/${bookingId}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+    );
+    const responses = await Promise.all(promises);
+    const hasError = responses.some(r => !r.ok);
+    if (hasError) {
+      showToast('Có lỗi xảy ra khi cập nhật một số dịch vụ', false);
     } else {
       showToast('Cập nhật trạng thái thành công!');
       closeStatusModal();

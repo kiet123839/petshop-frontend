@@ -5,7 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Quản lý Đơn hàng - PetShop Admin</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
- <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -293,12 +292,12 @@
 
 <!-- ═══ DETAIL MODAL ═══ -->
 <div id="detailModal" class="hidden fixed inset-0 bg-on-background/40 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
-  <div class="bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-lg border border-outline-variant overflow-hidden flex flex-col max-h-[90vh]">
+  <div class="bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-lg border border-outline-variant flex flex-col" style="max-height:90vh;overflow:hidden;">
     <div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
       <h3 id="detailTitle" class="text-lg font-semibold text-on-surface">Chi tiết đơn hàng</h3>
       <button onclick="closeDetailModal()" class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined">close</span></button>
     </div>
-    <div id="detailContent" class="p-6 flex-1 overflow-y-auto flex flex-col gap-md text-sm"></div>
+    <div id="detailContent" class="p-6 flex flex-col gap-md text-sm" style="flex:1;overflow-y:auto;min-height:0;"></div>
   </div>
 </div>
 
@@ -794,31 +793,25 @@ async function createOrder() {
   const btn = document.getElementById('createBtn');
   btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span>Đang tạo...';
 
-  // Chỉ gửi product items lên API (backend chỉ nhận productId)
-  // Service items tính vào note và discount
   const productItems = orderItems.filter(i => i.type === 'product');
   const serviceItems = orderItems.filter(i => i.type === 'service');
 
-  // OrderController.java nhận: { customerId, discountAmount, notes, items: [{productId, quantity}] }
-  // Nếu chỉ có service → items=[] → backend Java xử lý (có thể chấp nhận hoặc báo lỗi)
-  // Service được ghi vào notes để lưu lại
-  // Ghi dịch vụ vào notes (backend /api/orders chỉ có items cho product)
+  // Ghi dịch vụ vào notes để luôn hiển thị trong chi tiết đơn
   const serviceNote = serviceItems.length
-    ? '[Dịch vụ] ' + serviceItems.map(s => `${s.name} x${s.quantity} (${Number(s.price*s.quantity).toLocaleString('vi-VN')}đ)`).join(', ')
+    ? '[Dịch vụ] ' + serviceItems.map(s => s.name + ' x' + s.quantity + ' (' + Number(s.price*s.quantity).toLocaleString('vi-VN') + 'đ)').join(', ')
     : '';
   const userNotes = document.getElementById('cNotes').value.trim();
   const combinedNotes = [userNotes, serviceNote].filter(Boolean).join(' | ');
 
-  // Tính tổng tiền dịch vụ → gửi lên qua serviceAmount
-  // OrderService.java: totalAmount = productTotal + serviceAmount
   const serviceAmount = serviceItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   const body = {
     customerId:     parseInt(customerId),
     discountAmount: parseFloat(document.getElementById('cDiscount').value) || 0,
-    serviceAmount:  serviceAmount,   // ← backend cộng vào totalAmount/finalAmount
+    serviceAmount:  serviceAmount,
     notes:          combinedNotes || null,
-    items:          productItems.map(i => ({ productId: i.refId, quantity: i.quantity }))
+    items:          productItems.map(i => ({ productId: i.refId, quantity: i.quantity })),
+    serviceItems:   serviceItems.map(i => ({ serviceId: i.refId, quantity: i.quantity, unitPrice: i.price }))
   };
 
   try {
@@ -1009,6 +1002,50 @@ async function openDetail(id) {
     const st = STATUS_MAP[o.status] || { label: o.status, cls: '' };
     const paid = isPaidOrder(o);
     const payMethod = paid ? (PAYMENT_METHOD_LABELS[o.paymentMethod] || o.paymentMethod || 'Đã thanh toán') : 'Chờ thanh toán';
+
+    // ── Normalize product items: backend có thể trả về nhiều tên field khác nhau ──
+    const rawItems = o.items || o.orderItems || o.orderDetails || o.products || [];
+    const productItems = rawItems.map(it => ({
+      name:      it.productName || it.name || it.itemName || '(Sản phẩm)',
+      quantity:  it.quantity || 1,
+      unitPrice: Number(it.unitPrice || it.price || it.salePrice || 0),
+      subtotal:  Number(it.subtotal || it.total || ((it.unitPrice || it.price || 0) * (it.quantity || 1)))
+    }));
+
+    // ── Parse service items từ notes ──
+    let serviceItemsFromNotes = [];
+    let displayNotes = o.notes || '';
+    if (displayNotes) {
+      // Format 1 (tạo đơn thủ công): "[Dịch vụ] Tên x1 (300.000đ), Tên2 x1 (150.000đ)"
+      const svcMatch = displayNotes.match(/\[Dịch vụ\]\s*([^|]+)/);
+      if (svcMatch) {
+        const svcStr = svcMatch[1].trim();
+        serviceItemsFromNotes = svcStr.split(',').map(s => s.trim()).filter(Boolean).map(s => {
+          const m = s.match(/^(.+?)\s+x(\d+)\s*\((.+?)\)$/);
+          if (m) return { name: m[1].trim(), quantity: parseInt(m[2]), priceStr: m[3] };
+          return { name: s, quantity: 1, priceStr: '' };
+        });
+        displayNotes = displayNotes.replace(/\s*\|\s*\[Dịch vụ\][^|]*/g, '')
+                                   .replace(/\[Dịch vụ\][^|]*/g, '').trim()
+                                   .replace(/^\|\s*/, '').replace(/\s*\|$/, '').trim();
+      }
+      // Format 2 (từ booking): "[BOOKING #24] Dịch vụ: Grooming toàn diện | Thú cưng: ... | Lịch: ..."
+      const bookingSvcMatch = displayNotes.match(/Dịch vụ:\s*([^|]+)/);
+      if (bookingSvcMatch && serviceItemsFromNotes.length === 0) {
+        const svcName = bookingSvcMatch[1].trim();
+        serviceItemsFromNotes = [{ name: svcName, quantity: 1, priceStr: '' }];
+      }
+    }
+
+    // ── Backend trả serviceItems (ưu tiên) hoặc fallback parse từ notes ──
+    const backendServices = o.serviceItems || [];
+    // Chỉ dùng serviceItemsFromNotes nếu backend chưa trả serviceItems
+    const displayServices = backendServices.length > 0 ? backendServices : serviceItemsFromNotes;
+
+    const hasProducts  = productItems.length > 0;
+    const hasServices  = displayServices.length > 0;
+    const hasAnyItems  = hasProducts || hasServices;
+
     document.getElementById('detailContent').innerHTML = `
       <div class="grid grid-cols-2 gap-3">
         <div class="bg-surface-container p-3 rounded-lg"><p class="text-xs text-on-surface-variant">Mã đơn</p><p class="font-bold text-tertiary">#ORD-${o.orderId}</p></div>
@@ -1029,14 +1066,36 @@ async function openDetail(id) {
         <p class="text-sm"><span class="text-on-surface-variant">SĐT:</span> ${o.customerPhone || '—'}</p>
         <p class="text-sm"><span class="text-on-surface-variant">Mã KH:</span> ${o.customerCode || '—'}</p>
       </div>
-      <div class="border border-outline-variant rounded-lg overflow-hidden">
-        <p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wide px-4 py-2 bg-surface-container-low">Sản phẩm / Dịch vụ</p>
-        ${(o.items || []).map(it => `
-          <div class="px-4 py-2 border-t border-outline-variant/30 flex justify-between text-sm">
-            <div><p class="font-medium text-on-surface">${it.productName}</p><p class="text-xs text-on-surface-variant">x${it.quantity} × ${Number(it.unitPrice).toLocaleString('vi-VN')}đ</p></div>
-            <p class="font-semibold text-primary">${Number(it.subtotal).toLocaleString('vi-VN')}đ</p>
-          </div>`).join('') || '<p class="px-4 py-2 text-sm text-on-surface-variant">Không có mặt hàng</p>'}
-        ${o.notes ? `<div class="px-4 py-2 border-t border-outline-variant/30 text-xs text-on-surface-variant"><span class="font-medium">Ghi chú:</span> ${o.notes}</div>` : ''}
+      <div class="border border-outline-variant rounded-lg" style="overflow:visible;">
+        <p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wide px-4 py-2 bg-surface-container-low rounded-t-lg">Sản phẩm / Dịch vụ</p>
+        ${hasProducts ? productItems.map(it => `
+          <div class="px-4 py-2 border-t border-outline-variant/30 flex justify-between text-sm items-start">
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[14px] text-secondary mt-0.5">inventory_2</span>
+              <div><p class="font-medium text-on-surface">${it.name}</p><p class="text-xs text-on-surface-variant">x${it.quantity} × ${it.unitPrice.toLocaleString('vi-VN')}đ</p></div>
+            </div>
+            <p class="font-semibold text-primary whitespace-nowrap">${it.subtotal.toLocaleString('vi-VN')}đ</p>
+          </div>`).join('') : ''}
+        ${displayServices.map(sv => {
+          const svName  = sv.serviceName || sv.name || '(Dịch vụ)';
+          const svQty   = sv.quantity || 1;
+          const svPrice = Number(sv.unitPrice || sv.price || 0);
+          const svTotal = Number(sv.subtotal || sv.total || (svPrice * svQty));
+          const svPriceStr = sv.priceStr || '';
+          return `
+          <div class="px-4 py-2 border-t border-outline-variant/30 flex justify-between text-sm items-start">
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-[14px] text-tertiary mt-0.5">medical_services</span>
+              <div>
+                <p class="font-medium text-on-surface">${svName}</p>
+                <p class="text-xs text-on-surface-variant">x${svQty}${svPrice ? ' × ' + svPrice.toLocaleString('vi-VN') + 'đ' : (svPriceStr ? ' · ' + svPriceStr : '')}</p>
+              </div>
+            </div>
+            <p class="font-semibold text-tertiary whitespace-nowrap">${svTotal ? svTotal.toLocaleString('vi-VN') + 'đ' : svPriceStr}</p>
+          </div>`;
+        }).join('')}
+        ${!hasAnyItems ? '<p class="px-4 py-2 text-sm text-on-surface-variant italic">Không có mặt hàng</p>' : ''}
+        ${displayNotes ? `<div class="px-4 py-2 border-t border-outline-variant/30 text-xs text-on-surface-variant"><span class="font-medium">Ghi chú:</span> ${displayNotes}</div>` : ''}
       </div>
       <div class="border border-outline-variant rounded-lg p-4 flex flex-col gap-2">
         <div class="flex justify-between text-sm"><span class="text-on-surface-variant">Tạm tính:</span><span>${Number(o.totalAmount).toLocaleString('vi-VN')} ₫</span></div>

@@ -140,6 +140,14 @@
     content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px;
   }
 
+  /* Opaque dropdown menu background */
+  .service-dropdown .glassmorphism,
+  .store-dropdown .glassmorphism {
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   #mobile-menu { display:none; }
   #mobile-menu.open { display:block; }
   .mobile-submenu { display:none; }
@@ -245,7 +253,7 @@
           </div>
         </div>
       </div>
-      <a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md" href="orders_use.html">Đơn Hàng</a>
+      <a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md" href="order_use.html">Đơn Hàng</a>
       <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="contact.html">Liên Hệ</a>
       <a id="nav-dashboard" class="hidden items-center gap-1 text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="dashboard.html">
         <span class="material-symbols-outlined" style="font-size:16px;">storefront</span> Quản Lý
@@ -256,9 +264,10 @@
       <button class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">search</span>
       </button>
-      <button class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 relative">
+      <a href="product_use.html?openCart=true" class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 relative flex items-center justify-center">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">shopping_cart</span>
-      </button>
+        <span id="cartBadge" class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+      </a>
       <button class="text-primary hover:text-primary-fixed-dim transition-transform hover:scale-110 duration-300 hidden sm:block">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">notifications</span>
       </button>
@@ -728,6 +737,7 @@ function normalizeBooking(b) {
 // ═══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  updateNavbarCartBadge();
   const user = getUser();
   if (!user) {
     document.getElementById('not-logged-in').classList.remove('hidden');
@@ -1301,6 +1311,25 @@ function initNav() {
 function toggleMobileMenu(id) {
   const el = document.getElementById(id);
   if (el) el.classList.toggle('open');
+}
+
+function updateNavbarCartBadge() {
+  try {
+    const savedCart = localStorage.getItem('petshop_cart');
+    if (savedCart) {
+      const cart = JSON.parse(savedCart);
+      const count = Object.values(cart).reduce((a, b) => a + b, 0);
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count;
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    }
+  } catch(e) {}
 }
 </script>
 </body>
